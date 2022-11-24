@@ -1,0 +1,21 @@
+
+#index-body{
+    background-color: #1a1e21;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#sign-in-body{
+    background-color: #1a1e21;
+}
+
+#logInForm{
+    margin-top: 5rem;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 25vw;
+    object-fit: cover;
+}
