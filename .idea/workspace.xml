@@ -17,6 +17,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -31,7 +34,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/s5418936/OneDrive - Bournemouth University/Year 2/Web Programming/PHP Projects/Assignment",
+    "last_opened_file_path": "C:/Users/s5418936/OneDrive - Bournemouth University/Year 2/Web Programming/PHP Projects/Music_Store",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -55,10 +58,22 @@
       <workItem from="1669398649410" duration="3533000" />
       <workItem from="1669811615521" duration="14213000" />
       <workItem from="1669903708911" duration="12433000" />
+      <workItem from="1670162550605" duration="5650000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

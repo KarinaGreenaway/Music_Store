@@ -197,14 +197,14 @@ function invalidProductName($name){
     return $result;
 }
 
-function invalidProductStock($email){
+function invalidProductStock($stock){
     $result=false;
-    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    if(!($stock<=0)){
         $result=true;
     }
     return $result;
 }
-
+// NOT DONE
 function invalidProductPrice($pwd,$pwdRepeat){
     $result=false;
     if($pwd !== $pwdRepeat){
@@ -213,16 +213,16 @@ function invalidProductPrice($pwd,$pwdRepeat){
     return $result;
 }
 
-function productExists($connection, $username, $email){
-    $sql= "SELECT * FROM users WHERE users_username = ? OR users_email = ?;";
+function productExists($connection, $name, $category){
+    $sql= "SELECT * FROM product WHERE product_name = ? AND product_category = ?;";
     //prepared statements so users cannot insert their own sql script through the
-    // variables $username and $email as they are not directly embedded
+    // variables $name and $category as they are not directly embedded
     $stmt = mysqli_stmt_init($connection);
     if (!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../registration.php?error=stmtfailed");
+        header("location: ../admin.php?error=stmtfailed");
         exit();
     }
-    mysqli_stmt_bind_param($stmt, "ss",$username, $email);
+    mysqli_stmt_bind_param($stmt, "ss",$name, $category);
     mysqli_stmt_execute($stmt);
 
     $resultData= mysqli_stmt_get_result($stmt);
@@ -236,21 +236,19 @@ function productExists($connection, $username, $email){
     }
 }
 
-function createProduct($connection, $firstName, $lastName, $email, $username, $pwd){
-    $sql= "INSERT INTO users(users_forename, users_surname, users_email, users_username, users_password) VALUES (?,?,?,?,?);";
+function createProduct($connection, $name, $category, $description, $stock, $buyPrice, $sellPrice, $image){
+    $sql= "INSERT INTO product(product_name,category_name, product_description, product_stock,product_buy_price, product_sell_price,product_image) VALUES (?,?,?,?,?,?,?);";
     //prepared statements so users cannot insert their own sql script through the
     // variables needed as they are not directly embedded
     $stmt = mysqli_stmt_init($connection);
     if (!mysqli_stmt_prepare($stmt,$sql)){
-        header("location: ../registration.php?error=stmtfailed");
+        header("location: ../admin.php?error=stmtfailed");
         exit();
     }
 
-    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-
-    mysqli_stmt_bind_param($stmt, "sssss", $firstName,$lastName, $email, $username, $hashedPwd);
+    mysqli_stmt_bind_param($stmt, "sssssss", $name, $category, $description, $stock, $buyPrice, $sellPrice, $image);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../index.php?error=none");
+    header("location: ../admin.php?error=none");
     exit();
 }

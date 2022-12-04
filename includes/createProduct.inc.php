@@ -41,45 +41,50 @@
                 <form method="post">
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Name</label>
-                        <div class="">
+                        <div class="col-sm-9">
                             <input type="text" class="form-control" name="name" value="">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Category</label>
-                        <div class="">
+                        <div class="col-sm-9">
                             <input type="text" class="form-control" name="category" value="">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Description</label>
-                        <div class="">
-                           <!-- <input type="text" class="form-control" name="description" rows="4" value="" data-mdb-showcounter="true" maxlength="200">-->
+                        <div class="col-sm-9">
                             <textarea class="form-control" id="textAreaExample" rows="4" name="description" data-mdb-showcounter="true" maxlength="200"></textarea>
                             <div class="form-helper"></div>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Stock</label>
-                            <div class="input-group w-auto justify-content-end align-items-center rounded">
+                            <div class="input-group justify-content-end align-items-center rounded col-sm-9">
                                 <input type="number" step="1" max="1000" value="1" name="quantity" class="quantity-field border-0 text-center w-25 rounded">
                             </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Buy Price</label>
-                        <div class="">
-                            <input type="number" class="form-control" name="buyPrice" value="" step=".01">
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">£</span>
+                            </div>
+                            <input type="number" class="form-control" name="buyPrice" value="" step=".01"  oninput="restrict(this)">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Sell Price</label>
-                        <div class="">
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">£</span>
+                            </div>
                             <input type="number" class="form-control" name="sellPrice" value="" step=".01">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Image</label>
-                        <div class="">
+                        <div class="col-sm-9">
                             <input type="text" class="form-control" name="image" value="">
                         </div>
                     </div>
@@ -111,6 +116,7 @@
 
 
 
+
 <?php
 if (isset($_POST["createProductSubmit"])){ //checking that user got to page through admin
 
@@ -131,13 +137,13 @@ header("location: ../admin.php?error=emptyinput");
 exit();
 }
 
-if (invalidUsername($username)!== false){
-header("location: ../admin.php?error=invalidusername");
+if (invalidProductName($name)!== false){
+header("location: ../admin.php?error=invalidproductname");
 exit();
 }
 
-if (invalidEmail($email)!== false){
-header("location: ../registration.php?error=invalidemail");
+if (invalidProductStock($stock)!== false){
+header("location: ../registration.php?error=invalidstock");
 exit();
 }
 
@@ -146,9 +152,12 @@ header("location: ../registration.php?error=passwordsdontmatch");
 exit();
 }
 
-if (usernameExists($connection, $username, $email)!== false){
-header("location: ../registration.php?error=usernametaken");
+if (productExists($connection, $name, $category)!== false){
+header("location: ../admin.php?error=productexists");
 exit();
 }
+
+    createProduct($connection, $name, $category, $description, $stock, $buyPrice, $sellPrice, $image);
+    mysqli_close($connection);
 
 }
