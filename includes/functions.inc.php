@@ -58,7 +58,7 @@ function usernameExists($connection, $username, $email){
     //mysqli_stmt_close($stmt);
 }
 
-function createUser($connection, $firstName, $lastName, $email, $username, $pwd){
+function createUser($connection, $firstName, $lastName, $email, $usernameInput, $pwd){
     $sql= "INSERT INTO users(users_forename, users_surname, users_email, users_username, users_password) VALUES (?,?,?,?,?);";
     //prepared statements so users cannot insert their own sql script through the
     // variables needed as they are not directly embedded
@@ -70,7 +70,7 @@ function createUser($connection, $firstName, $lastName, $email, $username, $pwd)
 
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
-    mysqli_stmt_bind_param($stmt, "sssss", $firstName,$lastName, $email, $username, $hashedPwd);
+    mysqli_stmt_bind_param($stmt, "sssss", $firstName,$lastName, $email, $usernameInput, $hashedPwd);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     header("location: ../index.php?error=none");
@@ -100,7 +100,7 @@ function signinUser($connection,$user,$pwd){
         header("location:../signin.php?error=wronglogin");
         exit();
     }
-    //elseif ($checkPwd === true){
+
     else{
         session_start();
         $_SESSION["users_id"]= $usernameExists["users_id"];
