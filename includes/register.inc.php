@@ -2,7 +2,7 @@
 
 if (isset($_POST["registerSubmit"])){ //checking that user got to page through actually signing up
 
-    $username = $_POST["username"];
+    $usernameInput = $_POST["username"];
     $firstName = $_POST["firstName"];
     $lastName = $_POST["lastName"];
     $email = $_POST["email"];
@@ -12,12 +12,12 @@ if (isset($_POST["registerSubmit"])){ //checking that user got to page through a
     require_once 'connection.php';
     require_once 'functions.inc.php';
 
-    if (emptyInputRegister($username, $email, $firstName, $lastName, $pwd, $pwdRepeat)!== false){
+    if (emptyInputRegister($usernameInput, $email, $firstName, $lastName, $pwd, $pwdRepeat)!== false){
         header("location: ../registration.php?error=emptyinput");
         exit();
     }
 
-    if (invalidUsername($username)!== false){
+    if (invalidUsername($usernameInput)!== false){
         header("location: ../registration.php?error=invalidusername");
         exit();
     }
@@ -32,14 +32,14 @@ if (isset($_POST["registerSubmit"])){ //checking that user got to page through a
         exit();
     }
 
-    if (usernameExists($connection, $username, $email)!== false){
+    if (usernameExists($connection, $usernameInput, $email)!== false){
         header("location: ../registration.php?error=usernametaken");
         exit();
     }
 // maybe one for a long enough password
 
 
-    createUser($connection, $firstName, $lastName, $email, $username, $pwd);
+    createUser($connection, $firstName, $lastName, $email, $usernameInput, $pwd);
     mysqli_close($connection);
 
 }
