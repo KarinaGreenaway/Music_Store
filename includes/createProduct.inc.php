@@ -37,51 +37,74 @@
                     <span class="text-light" aria-hidden="true">&times;</span>
                 </button>
             </div>
+
+
             <div class="modal-body">
-                <form method="post">
+                <form method="post" action="includes/createProduct.inc.php" enctype="multipart/form-data">
+
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="name" value="">
+                            <input type="text" class="form-control" name="name" value="" autocomplete="off">
                         </div>
                     </div>
+
+
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Category</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="category" value="">
+                        <select name="category" class="form-control">
+                            <option value="">Select a Category</option>
+                            <option value="">Select a Category</option>
+                            <option value="">Select a Category</option>
+                            <option value="">Select a Category</option>
+                            <option value="">Select a Category</option>
+                            <option value="">Select a Category</option>
+                        </select>
                         </div>
                     </div>
+
+
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Description</label>
                         <div class="col-sm-9">
-                            <textarea class="form-control" id="textAreaExample" rows="4" name="description" data-mdb-showcounter="true" maxlength="200"></textarea>
+                            <textarea class="form-control" id="textAreaExample" rows="4" name="description" data-mdb-show-counter="true" maxlength="200"></textarea>
                             <div class="form-helper"></div>
                         </div>
                     </div>
+
+
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Stock</label>
                             <div class="input-group justify-content-end align-items-center rounded col-sm-9">
-                                <input type="number" step="1" max="1000" value="1" name="quantity" class="quantity-field border-0 text-center w-25 rounded">
+                                <input min="1" max="1000" type="number" step="1" value="" name="quantity" class="quantity-field border-0 text-center w-25 rounded"  autocomplete="off">
                             </div>
                     </div>
+
+
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Buy Price</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">£</span>
                             </div>
-                            <input type="number" class="form-control" name="buyPrice" value="" step=".01"  oninput="restrict(this)">
+                            <!-- oninput="restrict(this)"-->
+                            <input min="0.00" type="number" class="form-control" name="buyPrice" value="" step=".01"  autocomplete="off">
                         </div>
                     </div>
+
+
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Sell Price</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">£</span>
                             </div>
-                            <input type="number" class="form-control" name="sellPrice" value="" step=".01">
+                            <input min="0.00" type="number" class="form-control" name="sellPrice" value="" step=".01">
                         </div>
                     </div>
+
+
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Image</label>
                         <div class="col-sm-9">
@@ -90,6 +113,7 @@
                     </div>
                 </form>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button name="createProductSubmit" type="button" class="btn btn-secondary">Create</button>
