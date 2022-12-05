@@ -116,7 +116,11 @@ include_once 'header.php';
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+<<<<<<< HEAD
                     <input type="submit" name="createProductSubmit" id="createProductSubmit" class="btn btn-secondary" value="Create">
+=======
+                    <input type="submit" name="createProductSubmit" class="btn btn-secondary" value="Create">
+>>>>>>> 446bc51c14935b2d7fe117005b6f80680b5ed25b
                 </div>
             </div>
         </div>
