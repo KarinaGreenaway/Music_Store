@@ -90,7 +90,7 @@ session_start();
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Name</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="name" value="" autocomplete="off">
+                                <input type="text" class="form-control" name="productName" value="" autocomplete="off">
                             </div>
                     </div>
 
@@ -188,13 +188,14 @@ session_start();
 <?php
 if (isset($_POST["createProductSubmit"])){ //checking that user got to page through admin
 
-$name = $_POST["name"];
+$name = $_POST["productName"];
 $category = $_POST["category"];
 $description = $_POST["description"];
 $stock = $_POST["stock"];
 $buyPrice = $_POST["buyPrice"];
 $sellPrice = $_POST["sellPrice"];
-$image = $_POST["image"];
+$image = $_POST["image"]["name"];
+$tmp_image = $_POST["image"]["tmp_name"];
 
 
 require_once 'connection.php';
@@ -215,7 +216,7 @@ header("location: ../registration.php?error=invalidstock");
 exit();
 }
 
-if (pwdMatch($pwd, $pwdRepeat)!== false){
+if ( invalidProductPrice($buyPrice,$sellPrice)!== false){
 header("location: ../registration.php?error=passwordsdontmatch");
 exit();
 }
@@ -225,7 +226,7 @@ header("location: ../admin.php?error=productexists");
 exit();
 }
 
-    createProduct($connection, $name, $category, $description, $stock, $buyPrice, $sellPrice, $image);
+    createProduct($connection, $name, $category, $description, $stock, $buyPrice, $sellPrice, $image,$tmp_image);
     mysqli_close($connection);
 
 }

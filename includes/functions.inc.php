@@ -195,7 +195,7 @@ function getProductCategories($connection){
 // Error handling for empty inputs
 function emptyInputCreateProduct($name,$category,$description,$stock,$buyPrice,$sellPrice,$image){
     $result=false;
-    if(empty($name)||empty($category)||empty($description)||empty($stock)||empty($buyPrice)||empty($sellPrice)||empty($image)){
+    if(empty($name)||empty($category)||empty($description)||empty($stock)||empty($buyPrice)||empty($sellPrice)||empty($image)||($category==="Select a Category")){
         $result=true;
     }
     return $result;
@@ -216,10 +216,10 @@ function invalidProductStock($stock){
     }
     return $result;
 }
-// NOT DONE
-function invalidProductPrice($pwd,$pwdRepeat){
+
+function invalidProductPrice($buyPrice,$sellPrice){
     $result=false;
-    if($pwd !== $pwdRepeat){
+    if($buyPrice<0||$sellPrice<0||preg_match('/\.\d{3,}/', $buyPrice)||preg_match('/\.\d{3,}/', $sellPrice)){
         $result=true;
     }
     return $result;
@@ -248,7 +248,16 @@ function productExists($connection, $name, $category){
     }
 }
 
-function createProduct($connection, $name, $category, $description, $stock, $buyPrice, $sellPrice, $image){
+
+function uploadImage($image, $tmp_image){
+    move_uploaded_file($tmp_image, "../admin/product_images/$image");
+}
+
+
+function createProduct($connection, $name, $category, $description, $stock, $buyPrice, $sellPrice, $image, $tmp_image){
+
+    uploadImage($image, $tmp_image);
+
     $sql= "INSERT INTO product(product_name,category_name, product_description, product_stock,product_buy_price, product_sell_price,product_image) VALUES (?,?,?,?,?,?,?);";
     //prepared statements so users cannot insert their own sql script through the
     // variables needed as they are not directly embedded
