@@ -118,9 +118,6 @@ function getProducts($connection){
 
     $resultData= mysqli_query($connection,$sql);
 
-    //$productRow=mysqli_fetch_assoc($resultData);
-    //echo $productRow["product_name"];
-
     while($productRow=mysqli_fetch_assoc($resultData)){
         $productId=$productRow["product_id"];
         $productName=$productRow["product_name"];
@@ -179,6 +176,21 @@ function getProductTable($connection){
     ";
     }
 }
+
+function getProductCategories($connection){
+
+    //Below reads all rows from the category table in the database
+    $sql= "SELECT * FROM category;";
+    $resultData= mysqli_query($connection,$sql);
+
+    //Below runs through an associative array of the category table data and echoes it as rows for the products table
+    while($categoryRow=mysqli_fetch_assoc($resultData)){
+        echo "
+        <option value='$categoryRow[category_name]'>$categoryRow[category_name]</option>
+        ";
+    }
+}
+
 
 // Error handling for empty inputs
 function emptyInputCreateProduct($name,$category,$description,$stock,$buyPrice,$sellPrice,$image){

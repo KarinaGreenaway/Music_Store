@@ -29,20 +29,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/s5418936/OneDrive - Bournemouth University/Year 2/Web Programming/PHP Projects/Music_Store",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/s5418936/OneDrive - Bournemouth University/Year 2/Web Programming/PHP Projects/Music_Store&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Karin\OneDrive - Bournemouth University\Year 2\Web Programming\PHP Projects\Assignment\Assignment\Images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\s5418936\OneDrive - Bournemouth University\Year 2\Web Programming\PHP Projects\Music_Store" />
       <recent name="C:\Users\Karin\OneDrive - Bournemouth University\Year 2\Web Programming\PHP Projects\Assignment\Assignment\includes" />
     </key>
   </component>
@@ -59,6 +60,7 @@
       <workItem from="1669811615521" duration="14213000" />
       <workItem from="1669903708911" duration="12433000" />
       <workItem from="1670162550605" duration="5650000" />
+      <workItem from="1670238168293" duration="5377000" />
     </task>
     <servers />
   </component>
