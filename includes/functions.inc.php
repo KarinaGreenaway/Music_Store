@@ -40,7 +40,7 @@ function usernameExists($connection, $username, $email){
     // variables $username and $email as they are not directly embedded
     $stmt = mysqli_stmt_init($connection);
     if (!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: ../registration.php?error=stmtfailed");
+      //  header("location: ../registration.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ss",$username, $email);
@@ -64,7 +64,7 @@ function createUser($connection, $firstName, $lastName, $email, $usernameInput, 
     // variables needed as they are not directly embedded
     $stmt = mysqli_stmt_init($connection);
     if (!mysqli_stmt_prepare($stmt,$sql)){
-        header("location: ../registration.php?error=stmtfailed");
+        //header("location: ../registration.php?error=stmtfailed");
         exit();
     }
 
@@ -90,14 +90,14 @@ function emptyInputSignin($user, $pwd){
 function signinUser($connection,$user,$pwd){
     $usernameExists=usernameExists($connection, $user, $user);
     if ($usernameExists === false){
-        header("location:../signin.php?error=wronglogin");
+       // header("location:../signin.php?error=wronglogin");
         exit();
     }
     $pwdHashed = $usernameExists["users_password"];
     $checkPwd= password_verify($pwd, $pwdHashed);
 
     if ($checkPwd === false){
-        header("location:../signin.php?error=wronglogin");
+        //header("location:../signin.php?error=wronglogin");
         exit();
     }
 
@@ -127,9 +127,9 @@ function getProducts($connection){
 
         echo "
 
-        <div class='col-sm-6 col-md-3 col-lg-2 pt-4'>
-           <div class='card bg-light border-secondary' style='height: 50vh' >
-               <img class='card-img-top' src='admin/product_images/$productImage' alt='$productName Image' style='width: 100%; height: 25vh; object-fit: contain;'>
+        <div class='col-sm-6 col-md-4 col-lg-3 col-xl-2 pt-4'>
+           <div class='card bg-light border-secondary border-2' style='height: 60vh' >
+               <img class='card-img-top' src='admin/product_images/$productImage' alt='$productName Image' style='width: 100%; height: 30vh; object-fit: contain;'>
                <div class='card-body h-100 d-flex flex-column'>
                    <h5 class='card-title'>$productName</h5>
                    <h6 class='card-subtitle mb-2 text-muted'>$categoryName</h6>
@@ -254,23 +254,22 @@ function uploadImage($image, $tmp_image){
 }
 
 
-function createProduct($connection, $name, $category, $description, $stock, $buyPrice, $sellPrice, $image, $tmp_image){
-
-    uploadImage($image, $tmp_image);
+function createProduct($connection, $name, $category, $description, $stock, $buyPrice, $sellPrice, $image){
 
     $sql= "INSERT INTO product(product_name,category_name, product_description, product_stock,product_buy_price, product_sell_price,product_image) VALUES (?,?,?,?,?,?,?);";
     //prepared statements so users cannot insert their own sql script through the
     // variables needed as they are not directly embedded
     $stmt = mysqli_stmt_init($connection);
     if (!mysqli_stmt_prepare($stmt,$sql)){
-        header("location: ../admin.php?error=stmtfailed");
+       // header("location: ../admin.php?error=stmtfailed");
+        echo "<h1 class='text-white'>Technical issues</h1>";
         exit();
     }
 
     mysqli_stmt_bind_param($stmt, "sssidds", $name, $category, $description, $stock, $buyPrice, $sellPrice, $image);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../admin.php?error=none");
+    //header("location: ../admin.php?error=none");
     exit();
 }
 

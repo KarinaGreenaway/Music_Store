@@ -12,30 +12,30 @@ if (isset($_POST["registerSubmit"])){ //checking that user got to page through a
     require_once 'connection.php';
     require_once 'functions.inc.php';
 
-    if (emptyInputRegister($usernameInput, $email, $firstName, $lastName, $pwd, $pwdRepeat)!== false){
-        header("location: ../registration.php?error=emptyinput");
-        exit();
-    }
+   // if (emptyInputRegister($usernameInput, $email, $firstName, $lastName, $pwd, $pwdRepeat)!== false){
+   //     header("location: ../registration.php?error=emptyinput");
+   //     exit();
+   // }
 
-    if (invalidUsername($usernameInput)!== false){
-        header("location: ../registration.php?error=invalidusername");
-        exit();
-    }
+   // if (invalidUsername($usernameInput)!== false){
+   //     header("location: ../registration.php?error=invalidusername");
+   //     exit();
+   // }
 
-    if (invalidEmail($email)!== false){
-        header("location: ../registration.php?error=invalidemail");
-        exit();
-    }
+   // if (invalidEmail($email)!== false){
+   //     header("location: ../registration.php?error=invalidemail");
+   //     exit();
+   // }
 
-    if (pwdMatch($pwd, $pwdRepeat)!== false){
-        header("location: ../registration.php?error=passwordsdontmatch");
-        exit();
-    }
+   // if (pwdMatch($pwd, $pwdRepeat)!== false){
+   //     header("location: ../registration.php?error=passwordsdontmatch");
+   //     exit();
+   // }
 
-    if (usernameExists($connection, $usernameInput, $email)!== false){
-        header("location: ../registration.php?error=usernametaken");
-        exit();
-    }
+   // if (usernameExists($connection, $usernameInput, $email)!== false){
+   //     header("location: ../registration.php?error=usernametaken");
+   //     exit();
+   // }
 // maybe one for a long enough password
 
 
@@ -43,7 +43,7 @@ if (isset($_POST["registerSubmit"])){ //checking that user got to page through a
     mysqli_close($connection);
 
 }
-else{
-    header("location:../registration.php");
-}
+//else{
+//    header("location:../registration.php");
+//}
 

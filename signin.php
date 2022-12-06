@@ -31,7 +31,8 @@ include_once 'header.php';
             <p class="text-muted" >Don't have an account? <a href="registration.php" class="text-light">Register now</a></p>
 
                 <div class="text-light">
-                    <?php
+                    <!--
+                    php
                     if ($_GET["error"] == "emptyinput"){
                         echo "<p>Please fill in all fields.</p>";
                     }
@@ -39,10 +40,8 @@ include_once 'header.php';
                         echo "<p>Incorrect login information.</p>";
                     }
 
-                    ?>
+                    -->
                 </div>
-
-
           </form>
 
         </div>
