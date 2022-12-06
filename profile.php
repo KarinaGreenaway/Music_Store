@@ -20,13 +20,12 @@ include_once 'header.php';
 
 
                          $userId=$_SESSION['users_id'];
-                        echo " <h1 class='text-white'>$userId</h1> ";
                          $sql="SELECT * FROM users WHERE users_id='$userId'";
 
                          $userData=mysqli_query($connection, $sql);
 
                          if (!$userData){
-                             echo " <h1 class='text-white'>Didnt work</h1> ";
+                             echo " <h1 class='alert alert-danger'>Could not fetch your account data. Try again later.</h1> ";
                          }
                          else {
                              while ($userRow = mysqli_fetch_assoc($userData)) {

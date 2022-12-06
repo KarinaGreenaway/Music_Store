@@ -64,7 +64,7 @@ function createUser($connection, $firstName, $lastName, $email, $usernameInput, 
     // variables needed as they are not directly embedded
     $stmt = mysqli_stmt_init($connection);
     if (!mysqli_stmt_prepare($stmt,$sql)){
-        //header("location: ../registration.php?error=stmtfailed");
+        header("location: ../registration.php?error=stmtfailed");
         exit();
     }
 
@@ -191,8 +191,6 @@ function getProductCategories($connection){
     }
 }
 
-
-// Error handling for empty inputs
 function emptyInputCreateProduct($name,$category,$description,$stock,$buyPrice,$sellPrice,$image){
     $result=false;
     if(empty($name)||empty($category)||empty($description)||empty($stock)||empty($buyPrice)||empty($sellPrice)||empty($image)||($category==="Select a Category")){
@@ -270,5 +268,21 @@ function createProduct($connection, $name, $category, $description, $stock, $buy
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     header("location: ../admin.php?error=none");
+    exit();
+}
+
+// Functions for account page
+
+function updateAccount($connection, $usernameInput, $firstName, $lastName, $email, $id){
+    $sql2 = "UPDATE users SET users_username=?, users_forename=?,users_surname=?,users_email=? WHERE users_id='$id';";
+    $stmt2 = mysqli_stmt_init($connection);
+    if (!mysqli_stmt_prepare($stmt2, $sql2)) {
+        header("location: ../profile.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt2, "ssss", $usernameInput, $firstName, $lastName, $email);
+    mysqli_stmt_execute($stmt2);
+    mysqli_stmt_close($stmt2);
+    header("location: ../profile.php?error=none");
     exit();
 }
