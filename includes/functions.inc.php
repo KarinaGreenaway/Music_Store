@@ -261,7 +261,7 @@ function createProduct($connection, $name, $category, $description, $stock, $buy
     // variables needed as they are not directly embedded
     $stmt = mysqli_stmt_init($connection);
     if (!mysqli_stmt_prepare($stmt,$sql)){
-       // header("location: ../admin.php?error=stmtfailed");
+        header("location: ../admin.php?error=stmtfailed");
         echo "<h1 class='text-white'>Technical issues</h1>";
         exit();
     }
@@ -269,8 +269,6 @@ function createProduct($connection, $name, $category, $description, $stock, $buy
     mysqli_stmt_bind_param($stmt, "sssidds", $name, $category, $description, $stock, $buyPrice, $sellPrice, $image);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    //header("location: ../admin.php?error=none");
+    header("location: ../admin.php?error=none");
     exit();
 }
-
-//directly save image data
