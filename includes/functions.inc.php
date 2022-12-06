@@ -164,8 +164,8 @@ function getProductTable($connection){
                 <td data-toggle='tooltip' title='$productRow[product_description]' style='max-width: 250px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;'>
                     $productRow[product_description]</td>
                 <td>$productRow[product_stock]</td>
-                <td>$productRow[product_buy_price]</td>
-                <td>$productRow[product_sell_price]</td>
+                <td>£$productRow[product_buy_price]</td>
+                <td>£$productRow[product_sell_price]</td>
                 <td>$productRow[product_image]</td>
                 <td class='d-flex flex-row'>
                     <a class='btn btn-outline-secondary m-1' href='includes/editProduct.inc.php?id=$productRow[product_id]'> Edit </a>
