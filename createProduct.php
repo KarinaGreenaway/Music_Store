@@ -9,6 +9,7 @@
 <div class="modal fade" id="addProduct" tabindex="-1" role="dialog" aria-labelledby="addProductModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content bg-dark border-secondary text-light">
+<<<<<<< HEAD
             <form method="post" action="includes/createProduct.inc.php" id="createProductForm" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalScrollableTitle">Create New Product</h5>
@@ -20,6 +21,20 @@
 
                 <div class="modal-body">
                     <!-- -->
+=======
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">Create New Product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="text-light" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+
+            <div class="modal-body">
+                <!-- -->
+                <form method="post" action="includes/createProduct.inc.php" id="createProductForm" enctype="multipart/form-data">
+
+>>>>>>> 65098d81c65132a880f1ee685c37bd6fe1c27a56
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label">Name</label>
                         <div class="col-sm-9">
@@ -87,6 +102,7 @@
                             <input type="file" class="form-control align-content-center" name="image" value="">
                         </div>
                     </div>
+<<<<<<< HEAD
                 </div>
 
                 <div class="modal-footer">
@@ -95,6 +111,16 @@
                 </div>
 
             </form>
+=======
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <input type="submit" name="createProductSubmit" id="createProductSubmit" class="btn btn-secondary" value="Create">
+            </div>
+>>>>>>> 65098d81c65132a880f1ee685c37bd6fe1c27a56
         </div>
     </div>
 </div>

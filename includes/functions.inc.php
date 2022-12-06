@@ -269,7 +269,7 @@ function createProduct($connection, $name, $category, $description, $stock, $buy
     mysqli_stmt_bind_param($stmt, "sssidds", $name, $category, $description, $stock, $buyPrice, $sellPrice, $image);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../admin.php?error=none");
+    //header("location: ../admin.php?error=none");
     exit();
 }
 
