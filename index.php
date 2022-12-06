@@ -19,22 +19,6 @@ include_once 'header.php';
 <!-- Header End-->
 
 
-<!-- In case of admin errors-->
-<?php
-if ($_GET["error"] == "queryfailed"){
-    echo "
-    <div class='alert alert-secondary alert-dismissible fade show' role='alert'>
-    <strong>Oh No!</strong> We had an issue connecting you to Your Admin, try again later.
-    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    <span aria-hidden='true'>&times;</span>
-  </button>
-</div>
-    ";
-}
-?>
-<!-- In case of admin errors End-->
-
-
 <!--Product Gallery-->
 <div class="container-fluid bg-trasparent my-4 p-3" style="position: relative;">
     <h4 class="text-light text-center font-weight-lighter mb-3"> Shop Our Products</h4>

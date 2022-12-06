@@ -273,3 +273,5 @@ function createProduct($connection, $name, $category, $description, $stock, $buy
     header("location: ../admin.php?error=none");
     exit();
 }
+
+//directly save image data

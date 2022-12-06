@@ -13,8 +13,9 @@ $tmp_image = $_FILES["image"]["tmp_name"];
 
 require_once 'connection.php';
 require_once 'functions.inc.php';
-/**
- * if (emptyInputCreateProduct($name,$category,$description,$stock,$buyPrice,$sellPrice,$image)!== false){
+
+
+if(emptyInputCreateProduct($name,$category,$description,$stock,$buyPrice,$sellPrice,$image)!== false){
 header("location: ../admin.php?error=emptyinput");
 exit();
 }
@@ -38,7 +39,6 @@ if (productExists($connection, $name, $category)!== false){
 header("location: ../admin.php?error=productexists");
 exit();
 }
- **/
 
 
 
