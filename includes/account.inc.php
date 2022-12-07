@@ -17,3 +17,17 @@ if (isset($_POST['editAccountSubmit'])) {
     mysqli_close($connection);
 
     }
+
+
+elseif (isset($_POST['deleteAccountSubmit'])) {
+
+    $id = $_SESSION['users_id'];
+
+
+    require_once 'connection.php';
+    require_once 'functions.inc.php';
+
+    deleteAccount($connection, $id);
+    mysqli_close($connection);
+
+    }

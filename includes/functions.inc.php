@@ -286,3 +286,18 @@ function updateAccount($connection, $usernameInput, $firstName, $lastName, $emai
     header("location: ../profile.php?error=none");
     exit();
 }
+
+function deleteAccount($connection, $id){
+    $sql = "DELETE from users WHERE users_id='$id'";
+    $stmt = mysqli_stmt_init($connection);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../profile.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    require_once 'signout.inc.php';
+
+    //header("location: ../index.php?error=none");
+    exit();
+}

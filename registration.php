@@ -5,9 +5,9 @@ include_once 'header.php';
 <section class="vh-100">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-6 mt-5 px-4">
 
-                <div class="d-flex align-items-center" >
+                <div class="d-flex list-group list-group-horizontal justify-content-center" >
 
                     <!-- Registration Form-->
                     <form action="includes/register.inc.php" method="post" id="registerForm" style="width: 23rem;" >

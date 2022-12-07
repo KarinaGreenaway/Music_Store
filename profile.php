@@ -9,10 +9,10 @@ include_once 'header.php';
         <div class="row">
             <div class="col-sm-6 mt-5 px-4 ">
 
-                <div class="d-flex align-items-center offset-3" >
+                <div class="d-flex list-group list-group-horizontal justify-content-center" >
 
                     <!-- Profile Form-->
-                    <form action="includes/account.inc.php" method="post" id="registerForm" class="align-middle" style="width: 23rem;" >
+                    <form action="includes/account.inc.php" method="post" id="registerForm" class="" style="width: 23rem;" >
 
                         <?php
 
@@ -78,7 +78,7 @@ include_once 'header.php';
             </div>
 
             <!-- Side Image-->
-            <div class="col-sm-6 px-0 d-none d-sm-block vh-100">
+            <div class="col-sm-6 px-0 d-none d-sm-block">
                 <img src="Images/instrument-3.jpg"
                      alt="Registration image" class="w-100 h-100" style="object-fit: cover; object-position: left;">
             </div>
