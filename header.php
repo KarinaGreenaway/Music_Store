@@ -50,8 +50,8 @@
 
 
         </ul>
-        <form class="form-inline my-2 my-lg-0 mx-1">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <form action="searchResults.php" method="POST" class="form-inline my-2 my-lg-0 mx-1">
+            <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
 
             <a href="cart.php" class="btn btn-outline-secondary my-2 mx-2 my-sm-0">
