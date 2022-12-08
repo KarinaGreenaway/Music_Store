@@ -7,7 +7,7 @@ include_once 'header.php';
         <div class="d-flex list-group list-group-horizontal justify-content-center" >
 
             <!-- Update Product-->
-            <form method="post" action="includes/adminProduct.inc.php" id="editProductForm" enctype="multipart/form-data">
+            <form method="post" action="includes/updateProduct.inc.php" id="editProductForm" enctype="multipart/form-data">
                     <div class="d-flex list-group list-group-horizontal justify-content-center mt-4" id="editProduct" tabindex="-1" role="dialog" aria-labelledby="editProductForm" aria-hidden="true">
                         <div class=" bg-dark border-secondary text-light">
 

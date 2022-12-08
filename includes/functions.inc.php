@@ -106,6 +106,7 @@ function signinUser($connection,$user,$pwd){
         $_SESSION["users_id"]= $usernameExists["users_id"];
         $_SESSION["users_username"]= $usernameExists["users_username"];
         $_SESSION["users_is_admin"]= $usernameExists["users_is_admin"];
+        $_SESSION["users_status"];
         header("location:../index.php");
         exit();
     }
@@ -246,11 +247,9 @@ function productExists($connection, $name, $category){
     }
 }
 
-
 function uploadImage($image, $tmp_image){
     move_uploaded_file($tmp_image, "../admin/product_images/$image");
 }
-
 
 function createProduct($connection, $name, $category, $description, $stock, $buyPrice, $sellPrice, $image){
 
@@ -286,8 +285,25 @@ function updateProduct($connection,$id, $nameInput, $categoryInput, $description
     mysqli_stmt_close($stmt);
 
     $successMessage = "Product updated successfully";
+    
     header("location: ../admin.php");
+    $_SESSION["users_status"] = "$successMessage";
     exit;
+}
+
+function deleteProduct($connection, $id){
+
+    $sql = "DELETE from product WHERE product_id='$id'";
+    $stmt = mysqli_stmt_init($connection);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../admin.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+    header("location: ../admin.php?error=none");
+    exit();
 }
 
 

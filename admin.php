@@ -39,6 +39,12 @@ if (!empty($errorMessage)) {
                 echo "<h3 class='font-weight-light'>Welcome to Your Admin ".$_SESSION["users_username"]."!</h3>";
             }
             ?>
+            <?php
+            if (isset($_SESSION["users_status"])){
+                echo "<h3 class='font-weight-light'>Welcome to Your Admin ".$_SESSION["users_status"]."!</h3>";
+            }
+            ?>
+
         </div>
     </div>
 </header>
