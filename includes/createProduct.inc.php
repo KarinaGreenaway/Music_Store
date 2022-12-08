@@ -22,27 +22,27 @@ mysqli_close($connection);
 //}
 
 //if(emptyInputCreateProduct($name,$category,$description,$stock,$buyPrice,$sellPrice,$image)!== false){
-//header("location: ../admin.php?error=emptyinput");
+//$errorMessage= "Please fill in all fields.";
 //exit();
 //}
 
 //if (invalidProductName($name)!== false){
-//header("location: ../admin.php?error=invalidproductname");
+//$errorMessage= "Please enter a valid product name.";
 //exit();
 //}
 
 //if (invalidProductStock($stock)!== false){
-//header("location: ../registration.php?error=invalidstock");
+//$errorMessage= "Please enter a valid stock amount.";
 //exit();
 //}
 
 //if ( invalidProductPrice($buyPrice,$sellPrice)!== false){
-//header("location: ../registration.php?error=passwordsdontmatch");
+//$errorMessage= "Please enter valid product prices";
 //exit();
 //}
 
 //if (productExists($connection, $name, $category)!== false){
-//header("location: ../admin.php?error=productexists");
+//$errorMessage= "Sorry, this product already exists";
 //exit();
 //}
 

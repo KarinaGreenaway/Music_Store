@@ -168,7 +168,7 @@ function getProductTable($connection){
                 <td>£$productRow[product_sell_price]</td>
                 <td>$productRow[product_image]</td>
                 <td class='d-flex flex-row'>
-                    <a class='btn btn-outline-secondary m-1' href='includes/editProduct.inc.php?id=$productRow[product_id]'> Edit </a>
+                    <a class='btn btn-outline-secondary m-1' href='updateProduct.php?id=$productRow[product_id]'> Edit </a>
                     <a class='btn btn-outline-secondary m-1' href='includes/deleteProduct.inc.php?id=$productRow[product_id]'>Delete</a>
 
                 </td>
@@ -267,7 +267,8 @@ function createProduct($connection, $name, $category, $description, $stock, $buy
     mysqli_stmt_bind_param($stmt, "sssidds", $name, $category, $description, $stock, $buyPrice, $sellPrice, $image);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../admin.php?error=none");
+    $_SESSION["users_status"] = "Product created successfully"; //checkin
+    header("location: ../admin.php"); 
     exit();
 }
 
