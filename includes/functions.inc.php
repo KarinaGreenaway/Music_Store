@@ -272,6 +272,25 @@ function createProduct($connection, $name, $category, $description, $stock, $buy
     exit();
 }
 
+function updateProduct($connection,$id, $nameInput, $categoryInput, $descriptionInput, $stockInput, $buyPriceInput, $sellPriceInput, $imageInput,$tmpImageInput){
+    move_uploaded_file($tmpImageInput, "../admin/product_images/$imageInput");
+
+    $sql = "UPDATE product SET product_name=?, category_name=?, product_description=?, product_stock=?, product_buy_price=?, product_sell_price=?, product_image=? WHERE product_id='$id';";
+    $stmt = mysqli_stmt_init($connection);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        $errorMessage = "Invalid query: " . $connection->error;
+        exit;
+    }
+    mysqli_stmt_bind_param($stmt, "sssidds", $nameInput, $categoryInput, $descriptionInput, $stockInput, $buyPriceInput, $sellPriceInput, $imageInput);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+    $successMessage = "Product updated successfully";
+    header("location: ../admin.php");
+    exit;
+}
+
+
 // Functions for account page
 
 function updateAccount($connection, $usernameInput, $firstName, $lastName, $email, $id){
