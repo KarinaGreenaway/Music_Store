@@ -299,14 +299,12 @@ function createProduct($connection, $name, $category, $description, $stock, $buy
     $stmt = mysqli_stmt_init($connection);
     if (!mysqli_stmt_prepare($stmt,$sql)){
         header("location: ../admin.php?error=stmtfailed");
-        echo "<h1 class='text-white'>Technical issues</h1>";
         exit();
     }
 
     mysqli_stmt_bind_param($stmt, "sssidds", $name, $category, $description, $stock, $buyPrice, $sellPrice, $image);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    $_SESSION["users_status"] = "Product created successfully"; //checkin
     header("location: ../admin.php"); 
     exit();
 }
@@ -349,6 +347,13 @@ function deleteProduct($connection, $id){
 
 // Functions for account page
 
+function emptyInputUpdateAccount($usernameInput, $firstName, $lastName, $email){ //maybe
+    $result=false;
+    if(empty($usernameInput)||empty($firstName)||empty($lastName)||empty($email)){
+        $result=true;
+    }
+    return $result;
+}
 function updateAccount($connection, $usernameInput, $firstName, $lastName, $email, $id){
     $sql2 = "UPDATE users SET users_username=?, users_forename=?,users_surname=?,users_email=? WHERE users_id='$id';";
     $stmt2 = mysqli_stmt_init($connection);

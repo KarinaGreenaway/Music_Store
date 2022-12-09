@@ -1,7 +1,7 @@
 <?php
 
-//if (isset($_POST["createProductSubmit"])){
-
+$errorMessage = "";
+$successMessage = "";
 $name = $_POST["productName"];
 $category = $_POST["category"];
 $description = $_POST["description"];
@@ -15,16 +15,23 @@ $tmp_image = $_FILES["image"]["tmp_name"];
 require_once 'connection.php';
 require_once 'functions.inc.php';
 
-uploadImage($image, $tmp_image);
-createProduct($connection, $name, $category, $description, $stock, $buyPrice, $sellPrice, $image);
-mysqli_close($connection);
 
-//}
+if(emptyInputCreateProduct($name,$category,$description,$stock,$buyPrice,$sellPrice,$image)!== false){
+    $errorMessage= "Please fill in all fields.";
+    header("location: ../admin.php?error=emptyinput"); //needs to be implemented
+}
 
-//if(emptyInputCreateProduct($name,$category,$description,$stock,$buyPrice,$sellPrice,$image)!== false){
-//$errorMessage= "Please fill in all fields.";
-//exit();
-//}
+else{
+
+    uploadImage($image, $tmp_image);
+    createProduct($connection, $name, $category, $description, $stock, $buyPrice, $sellPrice, $image);
+    mysqli_close($connection); 
+}
+
+
+
+
+
 
 //if (invalidProductName($name)!== false){
 //$errorMessage= "Please enter a valid product name.";

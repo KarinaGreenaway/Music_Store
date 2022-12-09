@@ -14,6 +14,19 @@ include_once 'header.php';
                     <!-- Profile Form-->
                     <form action="includes/account.inc.php" method="post" id="registerForm" class="" style="width: 23rem;" >
 
+                    <?php
+                        if ($_GET["error"] == "emptyinput"){
+                            echo "
+                            <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                <strong>Please fill in all fields.</strong>
+                                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>    
+                            ";
+                        }
+                    ?>
+
                         <?php
 
                         require_once 'includes/connection.php';
@@ -25,7 +38,14 @@ include_once 'header.php';
                          $userData=mysqli_query($connection, $sql);
 
                          if (!$userData){
-                             echo " <h1 class='alert alert-danger'>Could not fetch your account data. Try again later.</h1> ";
+                             echo "
+                                <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                    <strong>Could not fetch your account data. Try again later.</strong>
+                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                        <span aria-hidden='true'>&times;</span>
+                                    </button>
+                                </div>  
+                             ";
                          }
                          else {
                              while ($userRow = mysqli_fetch_assoc($userData)) {
