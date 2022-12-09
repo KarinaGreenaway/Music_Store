@@ -354,6 +354,15 @@ function emptyInputUpdateAccount($usernameInput, $firstName, $lastName, $email){
     }
     return $result;
 }
+
+function invalidName($firstName, $lastName){
+    $result=false;
+    if(!preg_match("/^[a-zA-Z]+$/", $firstName)||!preg_match("/^[a-zA-Z]+$/", $lastName)){
+        $result=true;
+    }
+    return $result;
+}
+
 function updateAccount($connection, $usernameInput, $firstName, $lastName, $email, $id){
     $sql2 = "UPDATE users SET users_username=?, users_forename=?,users_surname=?,users_email=? WHERE users_id='$id';";
     $stmt2 = mysqli_stmt_init($connection);

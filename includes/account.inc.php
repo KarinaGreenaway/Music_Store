@@ -10,8 +10,17 @@ $email = $_POST['email'];
 require_once 'connection.php';
 require_once 'functions.inc.php';
 
+
 if(emptyInputUpdateAccount($usernameInput, $firstName, $lastName, $email)!== false){
     header("location: ../profile.php?error=emptyinput");  
+}
+
+elseif( invalidName($firstName, $lastName)!== false){
+    header("location: ../profile.php?error=invalidname");  
+}
+
+elseif(invalidEmail($email)!== false){
+    header("location: ../profile.php?error=invalidemail");  
 }
 
 elseif (isset($_POST['editAccountSubmit'])) {
