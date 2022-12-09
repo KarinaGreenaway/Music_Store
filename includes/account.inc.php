@@ -15,6 +15,10 @@ if(emptyInputUpdateAccount($usernameInput, $firstName, $lastName, $email)!== fal
     header("location: ../profile.php?error=emptyinput");  
 }
 
+elseif( invalidUserName($usernameInput)!== false){
+    header("location: ../profile.php?error=invalidusername");  
+}
+
 elseif( invalidName($firstName, $lastName)!== false){
     header("location: ../profile.php?error=invalidname");  
 }

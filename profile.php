@@ -1,5 +1,6 @@
 <?php
 include_once 'header.php';
+$error="";
 ?>
 
 
@@ -15,7 +16,10 @@ include_once 'header.php';
                     <form action="includes/account.inc.php" method="post" id="registerForm" class="" style="width: 23rem;" >
 
                     <?php
-                        if ($_GET["error"] == "emptyinput"){
+
+                    if (isset($_GET["error"])) {
+
+                        if ($_GET["error"] == "emptyinput") {
                             echo "
                             <div class='alert alert-light alert-dismissible fade show' role='alert'>
                                 <strong>Please fill in all fields.</strong>
@@ -24,8 +28,16 @@ include_once 'header.php';
                                 </button>
                             </div>    
                             ";
-                        }
-                        elseif ($_GET["error"] == "invalidname"){
+                        } elseif ($_GET["error"] == "invalidusername") {
+                            echo "
+                            <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                <strong>Please enter a valid username.</strong>
+                                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>    
+                            ";
+                        } elseif ($_GET["error"] == "invalidname") {
                             echo "
                             <div class='alert alert-light alert-dismissible fade show' role='alert'>
                                 <strong>Please enter valid names. No symbols or numbers.</strong>
@@ -34,8 +46,7 @@ include_once 'header.php';
                                 </button>
                             </div>    
                             ";
-                        }
-                        elseif ($_GET["error"] == "invalidemail"){
+                        } elseif ($_GET["error"] == "invalidemail") {
                             echo "
                             <div class='alert alert-light alert-dismissible fade show' role='alert'>
                                 <strong>Please enter valid email. Must be formatted as name@email.com</strong>
@@ -44,7 +55,26 @@ include_once 'header.php';
                                 </button>
                             </div>    
                             ";
+                        } elseif ($_GET["error"] == "stmtfailed") {
+                            echo "
+                            <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                <strong>Oops! There was a connection issue on our end. Try again later.</strong>
+                                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>    
+                            ";
+                        } elseif ($_GET["error"] == "none") {
+                            echo "
+                            <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                <strong>Account updated successfully!</strong>
+                                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>    
+                            ";
                         }
+                    }
                     ?>
 
                         <?php
@@ -102,7 +132,7 @@ include_once 'header.php';
                         </div>
 
                         <div class='pt-1 mb-4'>
-                            <input type='submit' name='deleteAccountSubmit' class='btn btn-secondary btn-lg btn-block' value='Delete Account'>
+                            <a onclick='javascript:confirmationDelete($(this));return false;' href='includes/deleteAccount.php' type='submit' name='deleteAccountSubmit' class='btn btn-secondary btn-lg btn-block' value='Delete Account'>Delete</a>
                         </div>
                                  ";
 
