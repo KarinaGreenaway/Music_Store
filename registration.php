@@ -12,6 +12,81 @@ include_once 'header.php';
                     <!-- Registration Form-->
                     <form action="includes/register.inc.php" method="post" id="registerForm" style="width: 23rem;" >
 
+                        <!--In case of errors-->
+                        <div class="text-light">
+                            <?php
+
+                            if (isset($_GET["error"])) {
+
+                                if ($_GET["error"] == "emptyinput") {
+                                    echo "
+                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                        <strong>Please fill in all fields.</strong>
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                            <span aria-hidden='true'>&times;</span>
+                                        </button>
+                                    </div>    
+                                ";
+                                } elseif ($_GET["error"] == "invalidusername") {
+                                    echo "
+                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                        <strong>Please enter a valid username.</strong>
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                            <span aria-hidden='true'>&times;</span>
+                                        </button>
+                                    </div>    
+                                ";
+                                } elseif ($_GET["error"] == "invalidemail") {
+                                    echo "
+                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                        <strong>Please enter valid email. Must be formatted as name@email.com.</strong>
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                            <span aria-hidden='true'>&times;</span>
+                                        </button>
+                                    </div>    
+                                ";
+                                } elseif ($_GET["error"] == "passwordsdontmatch") {
+                                    echo "
+                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                        <strong>Please enter matching passwords</strong>
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                            <span aria-hidden='true'>&times;</span>
+                                        </button>
+                                    </div>    
+                                ";
+                                } elseif ($_GET["error"] == "usernametaken") {
+                                    echo "
+                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                        <strong>This username is taken. Please enter a new username.</strong>
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                            <span aria-hidden='true'>&times;</span>
+                                        </button>
+                                    </div>    
+                                ";
+                                } elseif ($_GET["error"] == "stmtfailed") {
+                                    echo "
+                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                        <strong>Something went wrong. Please try again.</strong>
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                            <span aria-hidden='true'>&times;</span>
+                                        </button>
+                                    </div>    
+                                    ";
+                                } elseif ($_GET["error"] == "none") {
+                                    echo "
+                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                        <strong>Sign up successful!</strong>
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                            <span aria-hidden='true'>&times;</span>
+                                        </button>
+                                    </div>    
+                                ";
+                                }
+                            }   
+                            ?>
+                        </div>
+                        <!--In case of errors-->                    
+
                         <h3 class="fw-normal mb-3 pb-3 text-light">Register</h3>
 
                         <div class="form-outline mb-4">
@@ -47,85 +122,6 @@ include_once 'header.php';
                         <div class="pt-1 mb-4">
                             <input type="submit" name="registerSubmit" class="btn btn-secondary btn-lg btn-block" value="Register">
                         </div>
-
-                        <!--In case of errors-->
-                        <div class="text-light">
-                            <?php
-                            if ($_GET["error"] == "emptyinput"){
-                                echo "
-                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
-                                        <strong>Please fill in all fields.</strong>
-                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                            <span aria-hidden='true'>&times;</span>
-                                        </button>
-                                    </div>    
-                                ";
-                            }
-                            elseif ($_GET["error"] == "invalidusername"){
-                                echo "
-                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
-                                        <strong>Please enter a valid username.</strong>
-                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                            <span aria-hidden='true'>&times;</span>
-                                        </button>
-                                    </div>    
-                                ";
-                            }
-                            elseif ($_GET["error"] == "invalidemail"){
-                                echo "
-                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
-                                        <strong>Please enter valid email. Must be formatted as name@email.com.</strong>
-                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                            <span aria-hidden='true'>&times;</span>
-                                        </button>
-                                    </div>    
-                                ";
-                            }
-                            elseif ($_GET["error"] == "passwordsdontmatch"){
-                                echo "
-                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
-                                        <strong>Please enter matching passwords</strong>
-                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                            <span aria-hidden='true'>&times;</span>
-                                        </button>
-                                    </div>    
-                                ";
-                            }
-                            elseif ($_GET["error"] == "usernametaken"){
-                                echo "
-                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
-                                        <strong>This username is taken. Please enter a new username.</strong>
-                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                            <span aria-hidden='true'>&times;</span>
-                                        </button>
-                                    </div>    
-                                ";
-                            }
-                            elseif ($_GET["error"] == "stmtfailed"){
-                                echo "
-                                <div class='alert alert-light alert-dismissible fade show' role='alert'>
-                                    <strong>Something went wrong. Please try again.</strong>
-                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                        <span aria-hidden='true'>&times;</span>
-                                    </button>
-                                </div>    
-                            ";
-                            }
-                            elseif ($_GET["error"] == "none"){
-                                echo "
-                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
-                                        <strong>Sign up successful!</strong>
-                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                                            <span aria-hidden='true'>&times;</span>
-                                        </button>
-                                    </div>    
-                                ";
-                            }
-                            ?>
-                        </div>
-                        <!--In case of errors End-->
-
-
                     </form>
                     <!-- Registration Form End-->
 

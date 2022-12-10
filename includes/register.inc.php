@@ -40,7 +40,6 @@ if (isset($_POST["registerSubmit"])){ //checking that user got to page through a
     else{
         createUser($connection, $firstName, $lastName, $email, $usernameInput, $pwd);
         mysqli_close($connection);
-        //header("location:../registration.php");
     }
 
 

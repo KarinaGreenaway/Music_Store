@@ -69,8 +69,11 @@ function createUser($connection, $firstName, $lastName, $email, $usernameInput, 
     }
 
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+   
+    $fmtdFirstName = ucfirst($firstName);
+    $fmtdLastName = ucfirst($lastName);
 
-    mysqli_stmt_bind_param($stmt, "sssss", $firstName,$lastName, $email, $usernameInput, $hashedPwd);
+    mysqli_stmt_bind_param($stmt, "sssss", $fmtdFirstName,$fmtdLastName, $email, $usernameInput, $hashedPwd);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     signinUser($connection, $usernameInput, $pwd);
@@ -371,7 +374,11 @@ function updateAccount($connection, $usernameInput, $firstName, $lastName, $emai
         header("location: ../profile.php?error=stmtfailed");
         exit();
     }
-    mysqli_stmt_bind_param($stmt2, "ssss", $usernameInput, $firstName, $lastName, $email);
+
+    $fmtdFirstName = ucfirst($firstName);
+    $fmtdLastName = ucfirst($lastName);
+
+    mysqli_stmt_bind_param($stmt2, "ssss", $usernameInput, $fmtdFirstName, $fmtdLastName, $email);
     mysqli_stmt_execute($stmt2);
     mysqli_stmt_close($stmt2);
     header("location: ../profile.php?error=none");
