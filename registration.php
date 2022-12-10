@@ -57,7 +57,7 @@ include_once 'header.php';
                                 } elseif ($_GET["error"] == "usernametaken") {
                                     echo "
                                     <div class='alert alert-light alert-dismissible fade show' role='alert'>
-                                        <strong>This username is taken. Please enter a new username.</strong>
+                                        <strong>This username/email is taken. Please enter a new one.</strong>
                                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                             <span aria-hidden='true'>&times;</span>
                                         </button>
