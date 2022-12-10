@@ -6,12 +6,38 @@ include_once 'header.php';
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-6 mt-5 px-4 ">
-  
           <div class="d-flex list-group list-group-horizontal justify-content-center" >
-  
+
            <form action="includes/signin.inc.php" method="post" id="signinForm" style="width: 23rem;" >
 
             <h3 class="fw-normal mb-3 pb-3 text-light ">Log in</h3>
+
+            <?php
+
+              if (isset($_GET["error"])) {
+
+                if ($_GET["error"] == "wronglogin") {
+                  echo "
+                        <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                            <strong>This account does not exist, check that your details are correct.</strong>
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                        </div>    
+                        ";
+                } elseif ($_GET["error"] == "emptyinput") {
+                  echo "
+                        <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                            <strong>Please fill in all fields.</strong>
+                            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                        </div>    
+                        ";
+                }
+              }
+
+              ?>            
 
             <div class="form-outline mb-4">
               <input type="text" name="user" id="user" class="form-control form-control-lg" />

@@ -73,7 +73,8 @@ function createUser($connection, $firstName, $lastName, $email, $usernameInput, 
     mysqli_stmt_bind_param($stmt, "sssss", $firstName,$lastName, $email, $usernameInput, $hashedPwd);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../index.php?error=none");
+    signinUser($connection, $usernameInput, $pwd);
+    //header("location: ../index.php?error=none");
     exit();
 }
 
@@ -90,14 +91,14 @@ function emptyInputSignin($user, $pwd){
 function signinUser($connection,$user,$pwd){
     $usernameExists=usernameExists($connection, $user, $user);
     if ($usernameExists === false){
-       // header("location:../signin.php?error=wronglogin");
+        header("location:../signin.php?error=wronglogin");
         exit();
     }
     $pwdHashed = $usernameExists["users_password"];
     $checkPwd= password_verify($pwd, $pwdHashed);
 
     if ($checkPwd === false){
-        //header("location:../signin.php?error=wronglogin");
+        header("location:../signin.php?error=wronglogin");
         exit();
     }
 

@@ -9,7 +9,6 @@ $error="";
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6 mt-5 px-4 ">
-
                 <div class="d-flex list-group list-group-horizontal justify-content-center" >
 
                     <!-- Profile Form-->
@@ -75,6 +74,22 @@ $error="";
                             ";
                         }
                     }
+                    elseif (isset($_GET["require"])) {
+
+                        if ($_GET["require"] == "confirmpassword") {
+                            echo "
+                            <form action='includes/account.inc.php' method='post'>
+                            <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                <strong>Are you sure you want to delete your account? All your saved information will be deleted.</strong>
+                                <input  type='submit' name='deleteAccountSubmitConfirmed' class='btn btn-secondary btn-block m-2' value='Yes'/>
+                                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                    <span aria-hidden='true'>&times;</span>
+                                </button>
+                            </div>  
+                            ";
+                        } 
+                    }
+  
                     ?>
 
                         <?php
@@ -132,7 +147,7 @@ $error="";
                         </div>
 
                         <div class='pt-1 mb-4'>
-                            <a onclick='javascript:confirmationDelete($(this));return false;' href='includes/deleteAccount.php' type='submit' name='deleteAccountSubmit' class='btn btn-secondary btn-lg btn-block' value='Delete Account'>Delete</a>
+                            <input  type='submit' name='deleteAccountSubmit' class='btn btn-secondary btn-lg btn-block' value='Delete Account'/>
                         </div>
                                  ";
 
@@ -140,9 +155,9 @@ $error="";
                          }
                         ?>
 
-
-
                     </form>
+
+                    
                     <!-- Profile Form End-->
                 </div>
             </div>

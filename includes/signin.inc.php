@@ -6,14 +6,17 @@ if (isset($_POST["signinSubmit"])) {
     require_once 'connection.php';
     require_once 'functions.inc.php';
 
-    signinUser($connection,$user,$pwd);
+    if (emptyInputSignin($user, $pwd)!== false){
+        header("location: ../signin.php?error=emptyinput");
+   }
+   else{
+       signinUser($connection,$user,$pwd);
+   }
+   
 
 }
 
-  //  if (emptyInputSignin($user, $pwd)!== false){
-  //      header("location: ../signin.php?error=emptyinput");
-  //      exit();
-   // }
+
 
 //    signinUser($connection,$user,$pwd);
 //}

@@ -37,13 +37,20 @@ elseif (isset($_POST['editAccountSubmit'])) {
 
 elseif (isset($_POST['deleteAccountSubmit'])) {
 
+    //$id = $_SESSION['users_id'];
+
+    //deleteAccount($connection, $id);
+    //mysqli_close($connection);
+
+    header("location: ../profile.php?require=confirmpassword");  
+
+}
+
+elseif (isset($_POST['deleteAccountSubmitConfirmed'])) {
+
     $id = $_SESSION['users_id'];
-
-
-    require_once 'connection.php';
-    require_once 'functions.inc.php';
 
     deleteAccount($connection, $id);
     mysqli_close($connection);
-
-    }
+    
+}

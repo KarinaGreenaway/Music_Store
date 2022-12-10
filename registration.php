@@ -52,25 +52,74 @@ include_once 'header.php';
                         <div class="text-light">
                             <?php
                             if ($_GET["error"] == "emptyinput"){
-                                echo "<p>Please fill in all fields.</p>";
+                                echo "
+                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                        <strong>Please fill in all fields.</strong>
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                            <span aria-hidden='true'>&times;</span>
+                                        </button>
+                                    </div>    
+                                ";
                             }
                             elseif ($_GET["error"] == "invalidusername"){
-                                echo "<p>Please choose a valid username.</p>";
+                                echo "
+                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                        <strong>Please enter a valid username.</strong>
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                            <span aria-hidden='true'>&times;</span>
+                                        </button>
+                                    </div>    
+                                ";
                             }
                             elseif ($_GET["error"] == "invalidemail"){
-                                echo "<p>Please use a valid email address.</p>";
+                                echo "
+                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                        <strong>Please enter valid email. Must be formatted as name@email.com.</strong>
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                            <span aria-hidden='true'>&times;</span>
+                                        </button>
+                                    </div>    
+                                ";
                             }
                             elseif ($_GET["error"] == "passwordsdontmatch"){
-                                echo "<p>Your passwords do not match.</p>";
+                                echo "
+                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                        <strong>Please enter matching passwords</strong>
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                            <span aria-hidden='true'>&times;</span>
+                                        </button>
+                                    </div>    
+                                ";
                             }
                             elseif ($_GET["error"] == "usernametaken"){
-                                echo "<p>This username is already taken.</p>";
+                                echo "
+                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                        <strong>This username is taken. Please enter a new username.</strong>
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                            <span aria-hidden='true'>&times;</span>
+                                        </button>
+                                    </div>    
+                                ";
                             }
                             elseif ($_GET["error"] == "stmtfailed"){
-                                echo "<p>Something went wrong, please try again.</p>";
+                                echo "
+                                <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                    <strong>Something went wrong. Please try again.</strong>
+                                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                        <span aria-hidden='true'>&times;</span>
+                                    </button>
+                                </div>    
+                            ";
                             }
                             elseif ($_GET["error"] == "none"){
-                                echo "<p>Sign up successful!</p>";
+                                echo "
+                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                        <strong>Sign up successful!</strong>
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                            <span aria-hidden='true'>&times;</span>
+                                        </button>
+                                    </div>    
+                                ";
                             }
                             ?>
                         </div>
