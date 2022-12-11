@@ -153,7 +153,7 @@ function getProducts($connection){
 
 function getResults($connection, $search){
 
-    $sql = "SELECT * FROM product WHERE product_name LIKE '%$search%'";
+    $sql = "SELECT * FROM product WHERE product_name LIKE '%$search%' OR category_name LIKE '%$search%' OR product_description LIKE '%$search%'";
 
     $resultData= mysqli_query($connection,$sql);
 
