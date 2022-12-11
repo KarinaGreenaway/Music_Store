@@ -214,7 +214,8 @@ function getProductTable($connection){
                 <td>$productRow[product_image]</td>
                 <td class='d-flex flex-row'>
                     <a class='btn btn-outline-secondary m-1' href='updateProduct.php?id=$productRow[product_id]'> Edit </a>
-                    <a class='btn btn-outline-secondary m-1' href='includes/deleteProduct.inc.php?id=$productRow[product_id]'>Delete</a>
+                    <input type='hidden' name='id' value='$productRow[product_id]'/>
+                    <input type='submit' name='deleteProductSubmit' class='btn btn-outline-secondary m-1' value='Delete' />
 
                 </td>
             </tr>
@@ -244,31 +245,31 @@ function emptyInputCreateProduct($name,$category,$description,$stock,$buyPrice,$
     return $result;
 }
 
-function invalidProductName($name){
+function invalidProductName($nameInput){
     $result=false;
-    if(!preg_match("/^[a-zA-Z0-9]*$/", $name)){
+    if(!preg_match("/^[a-zA-Z0-9]*$/", $nameInput)){
         $result=true;
     }
     return $result;
 }
 
-function invalidProductStock($stock){
+function invalidProductStock($stockInput){
     $result=false;
-    if(!($stock<=0)){
+    if(!($stockInput<=0)){
         $result=true;
     }
     return $result;
 }
 
-function invalidProductPrice($buyPrice,$sellPrice){
+function invalidProductPrice($buyPriceInput,$sellPriceInput){
     $result=false;
-    if($buyPrice<0||$sellPrice<0||preg_match('/\.\d{3,}/', $buyPrice)||preg_match('/\.\d{3,}/', $sellPrice)){
+    if($buyPriceInput<0||$sellPriceInput<0||preg_match('/\.\d{3,}/', $buyPriceInput)||preg_match('/\.\d{3,}/', $sellPriceInput)){
         $result=true;
     }
     return $result;
 }
 
-function productExists($connection, $name, $category){
+function productExists($connection, $nameInput, $categoryInput){
     $sql= "SELECT * FROM product WHERE product_name = ? AND product_category = ?;";
     //prepared statements so users cannot insert their own sql script through the
     // variables $name and $category as they are not directly embedded
@@ -277,7 +278,7 @@ function productExists($connection, $name, $category){
         header("location: ../admin.php?error=stmtfailed");
         exit();
     }
-    mysqli_stmt_bind_param($stmt, "ss",$name, $category);
+    mysqli_stmt_bind_param($stmt, "ss",$nameInput, $categoryInput);
     mysqli_stmt_execute($stmt);
 
     $resultData= mysqli_stmt_get_result($stmt);
@@ -309,7 +310,7 @@ function createProduct($connection, $name, $category, $description, $stock, $buy
     mysqli_stmt_bind_param($stmt, "sssidds", $name, $category, $description, $stock, $buyPrice, $sellPrice, $image);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-    header("location: ../admin.php"); 
+    header("location: ../admin.php?error=createnone"); 
     exit();
 }
 
@@ -325,11 +326,7 @@ function updateProduct($connection,$id, $nameInput, $categoryInput, $description
     mysqli_stmt_bind_param($stmt, "sssidds", $nameInput, $categoryInput, $descriptionInput, $stockInput, $buyPriceInput, $sellPriceInput, $imageInput);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
-
-    $successMessage = "Product updated successfully";
-    
-    header("location: ../admin.php");
-    $_SESSION["users_status"] = "$successMessage";
+    header("location: ../admin.php?error=updatenone");
     exit;
 }
 
@@ -344,7 +341,7 @@ function deleteProduct($connection, $id){
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
-    header("location: ../admin.php?error=none");
+    header("location: ../admin.php?error=deletenone");
     exit();
 }
 
