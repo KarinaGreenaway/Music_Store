@@ -245,14 +245,6 @@ function emptyInputCreateProduct($name,$category,$description,$stock,$buyPrice,$
     return $result;
 }
 
-function invalidProductName($nameInput){
-    $result=false;
-    if(!preg_match("/^[a-zA-Z0-9]*$/", $nameInput)){
-        $result=true;
-    }
-    return $result;
-}
-
 function invalidProductStock($stockInput){
     $result=false;
     if(!($stockInput<=0)){

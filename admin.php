@@ -5,46 +5,12 @@ include_once 'header.php';
 <!-- Header-->
 <header class="bg-dark text-white py-4">
     <div class="container px-3 px-lg-4 my-4">
-    <?php
-
-    if (isset($_SESSION['users_status'])) {
-        $message = $_SESSION['users_status'];
-        echo "
-        <div class='alert alert-warning alert-dismissible fade show' role='alert'>
-                <strong>Hey! $message </strong>
-                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-            </div>
-        ";
-        unset($message);
-    }
-    ?>
-
-<?php
-
-if (!empty($errorMessage)) {
-    echo "
-    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
-            <strong>Hey! $errorMessage </strong>
-            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-        </div>
-    ";
-    unset($errorMessage);
-}
-?>
-
-
         <div class="text-center text-white">
             <?php
             if (isset($_SESSION["users_username"])){
                 echo "<h3 class='font-weight-light'>Welcome to Your Admin ".$_SESSION["users_username"]."!</h3>";
             }
             ?>
-            <?php
-            if (isset($_SESSION["users_status"])){
-                echo "<h3 class='font-weight-light'>Welcome to Your Admin ".$_SESSION["users_status"]."!</h3>";
-            }
-            ?>
-
         </div>
     </div>
 </header>
@@ -66,15 +32,6 @@ if (!empty($errorMessage)) {
             echo "
             <div class='alert alert-light alert-dismissible fade show' role='alert'>
                 <strong>Please fill in all fields.</strong>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                    <span aria-hidden='true'>&times;</span>
-                </button>
-            </div>    
-            ";
-        } elseif ($_GET["error"] == "invalidname") {
-            echo "
-            <div class='alert alert-light alert-dismissible fade show' role='alert'>
-                <strong>Please enter a valid username.</strong>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                     <span aria-hidden='true'>&times;</span>
                 </button>
