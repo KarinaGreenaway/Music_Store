@@ -185,7 +185,6 @@ function signinUser($connection,$user,$pwd){
         $_SESSION["users_id"]= $usernameExists["users_id"];
         $_SESSION["users_username"]= $usernameExists["users_username"];
         $_SESSION["users_is_admin"]= $usernameExists["users_is_admin"];
-        $_SESSION["users_status"];
         header("location:../index.php");
         exit();
     }
@@ -195,8 +194,8 @@ function signinUser($connection,$user,$pwd){
 
 /**
  * getProducts uses the $connection variable to run through each 
- * assoociative array created from each tuple of the database and 
- * create the html card for each product.
+ * assoociative array created from each tuple of the product table and 
+ * creates the html card for each product.
  * @param mixed $connection
  * @return void
  */
@@ -233,6 +232,14 @@ function getProducts($connection){
 
 //Functions for search results page
 
+/**
+ * getResults uses LIKE and the % wildcard to search for the pattern 
+ * specified by the users text search within the name, category and description 
+ * columns of the product table. This returns the results as product cards.
+ * @param mixed $connection
+ * @param mixed $search
+ * @return void search results
+ */
 function getResults($connection, $search){
 
     $sql = "SELECT * FROM product WHERE product_name LIKE '%$search%' OR category_name LIKE '%$search%' OR product_description LIKE '%$search%'";
@@ -273,13 +280,18 @@ else{
 
 //Functions for admin page
 
+/**
+ * getProductTable reads all the products within the product table
+ * of the database by running through an associative array of each
+ * row and creating an html row for each to be displayed in admin.php
+ * @param mixed $connection
+ * @return void products table
+ */
 function getProductTable($connection){
 
-    //Below reads all rows from the product table in the database
     $sql= "SELECT * FROM product;";
     $resultData= mysqli_query($connection,$sql);
 
-    //Below runs through an associative array of the product table data and echoes it as rows for the admins table
     while($productRow=mysqli_fetch_assoc($resultData)){
 
         echo "
@@ -305,13 +317,18 @@ function getProductTable($connection){
     }
 }
 
+/**
+ * getProductCategories reads all the rows of the category table by
+ * running through an associative array of each and creating the resultant
+ * html option for the category selection dropdown in admin.php
+ * @param mixed $connection
+ * @return void category selection drop down
+ */
 function getProductCategories($connection){
 
-    //Below reads all rows from the category table in the database
     $sql= "SELECT * FROM category;";
     $resultData= mysqli_query($connection,$sql);
 
-    //Below runs through an associative array of the category table data and echoes it as rows for the products table
     while($categoryRow=mysqli_fetch_assoc($resultData)){
         echo "
         <option value='$categoryRow[category_name]'>$categoryRow[category_name]</option>
@@ -319,6 +336,20 @@ function getProductCategories($connection){
     }
 }
 
+/**
+ * emptyInputCreateProduct checks if any of the inputs of the 
+ * add product or update product form have not been filled in. The boolean result is 
+ * then used in createProduct.inc.php to pass an error to admin.php 
+ * through a header if necessary.
+ * @param mixed $name
+ * @param mixed $category
+ * @param mixed $description
+ * @param mixed $stock
+ * @param mixed $buyPrice
+ * @param mixed $sellPrice
+ * @param mixed $image
+ * @return bool
+ */
 function emptyInputCreateProduct($name,$category,$description,$stock,$buyPrice,$sellPrice,$image){
     $result=false;
     if(empty($name)||empty($category)||empty($description)||empty($stock)||empty($buyPrice)||empty($sellPrice)||empty($image)||($category==="Select a Category")){
@@ -327,9 +358,15 @@ function emptyInputCreateProduct($name,$category,$description,$stock,$buyPrice,$
     return $result;
 }
 
+/**
+ * invalidProductStock checks that the stock number entered into
+ * the 
+ * @param mixed $stockInput
+ * @return bool
+ */
 function invalidProductStock($stockInput){
     $result=false;
-    if(!($stockInput<=0)){
+    if($stockInput<=0){
         $result=true;
     }
     return $result;

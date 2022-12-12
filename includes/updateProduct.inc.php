@@ -18,9 +18,9 @@ if (isset($_POST["updateProductSubmit"])) {
     if(emptyInputCreateProduct($nameInput,$categoryInput,$descriptionInput,$stockInput,$buyPriceInput,$sellPriceInput,$imageInput)!==false){
         header("location: ../admin.php?error=emptyinput"); 
     }
-    //elseif(invalidProductStock($stockInput)!==false){
-    //    header("location: ../admin.php?error=invalidstock"); 
-    //}
+    elseif(invalidProductStock($stockInput)!==false){
+        header("location: ../admin.php?error=invalidstock"); 
+    }
     elseif(invalidProductPrice($buyPriceInput,$sellPriceInput)!==false){
         header("location: ../admin.php?error=invalidprice"); 
     }

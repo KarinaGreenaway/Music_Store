@@ -64,7 +64,16 @@ include_once 'header.php';
                 </button>
             </div>    
             ";
-        } elseif ($_GET["error"] == "stmtfailed") {
+        } elseif ($_GET["error"] == "notadmin") {
+            echo "
+            <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                <strong>Oops! We could not verify that you are admin. Try signing in again.</strong>
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                </button>
+            </div>    
+            ";
+        }elseif ($_GET["error"] == "stmtfailed") {
             echo "
             <div class='alert alert-light alert-dismissible fade show' role='alert'>
                 <strong>Oops! There was a connection issue on our end. Try again later.</strong>
