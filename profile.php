@@ -1,9 +1,7 @@
+
 <?php
 include_once 'header.php';
-$error="";
 ?>
-
-
 
 <section class="vh-100">
     <div class="container-fluid">

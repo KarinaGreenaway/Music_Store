@@ -18,9 +18,6 @@ if (!$connection) {
         echo "<p>Failed to connect to MySQL. " .
             "Error (" . mysqli_connect_errno() . "): " . mysqli_connect_error() . "</p>";
     }
-    //else {
-    //    echo "<p>Connected to server: " . mysqli_get_host_info($connection) . "</p>";
 
-    //}
 }
 

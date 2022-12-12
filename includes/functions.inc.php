@@ -2,6 +2,17 @@
 
 //Functions for registration Users
 
+/**
+ * emptyInputRegister checks if any of the
+ * registration forms inputs have not been filled in.
+ * @param mixed $username
+ * @param mixed $email
+ * @param mixed $firstName
+ * @param mixed $lastName
+ * @param mixed $pwd
+ * @param mixed $pwdRepeat
+ * @return bool
+ */
 function emptyInputRegister($username, $email, $firstName,$lastName, $pwd, $pwdRepeat){
     $result=false;
     if(empty($username)||empty($email)||empty($firstName)||empty($lastName)||empty($pwd)||empty($pwdRepeat)){
@@ -10,6 +21,12 @@ function emptyInputRegister($username, $email, $firstName,$lastName, $pwd, $pwdR
     return $result;
 }
 
+/**
+ * invalidUsername checks that the username entered during 
+ * registration only contains letters or numbers.
+ * @param mixed $username
+ * @return bool
+ */
 function invalidUsername($username){
     $result=false;
     if(!preg_match("/^[a-zA-Z0-9]*$/", $username)){
@@ -18,6 +35,11 @@ function invalidUsername($username){
     return $result;
 }
 
+/**
+ * invalidEmail checks that the email entered during registration is of valid email format
+ * @param mixed $email
+ * @return bool
+ */
 function invalidEmail($email){
     $result=false;
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
@@ -26,6 +48,13 @@ function invalidEmail($email){
     return $result;
 }
 
+/**
+ * pwdMatch checks that both the password 
+ * entries during registration are identical to each other.
+ * @param mixed $pwd
+ * @param mixed $pwdRepeat
+ * @return bool
+ */
 function pwdMatch($pwd,$pwdRepeat){
     $result=false;
     if($pwd !== $pwdRepeat){
@@ -34,13 +63,23 @@ function pwdMatch($pwd,$pwdRepeat){
     return $result;
 }
 
+/**
+ * usernameExists checks if there is already a
+ * user in the database with an identical username or email as entered in the registration form.
+ * This function uses prepared statements  so users cannot insert their own sql script through 
+ * the variables $username and $email as they will not be directly embedded.
+ * If the statement fails the error is passed through a header which will be checked and echoed 
+ * in registration.php
+ * @param mixed $connection
+ * @param mixed $username
+ * @param mixed $email
+ * @return array|bool|null
+ */
 function usernameExists($connection, $username, $email){
     $sql= "SELECT * FROM users WHERE users_username = ? OR users_email = ?;";
-    //prepared statements so users cannot insert their own sql script through the
-    // variables $username and $email as they are not directly embedded
     $stmt = mysqli_stmt_init($connection);
     if (!mysqli_stmt_prepare($stmt, $sql)){
-      //  header("location: ../registration.php?error=stmtfailed");
+        header("location: ../registration.php?error=stmtfailed");
         exit();
     }
     mysqli_stmt_bind_param($stmt, "ss",$username, $email);
@@ -48,20 +87,33 @@ function usernameExists($connection, $username, $email){
 
     $resultData= mysqli_stmt_get_result($stmt);
 
-    if ($row=mysqli_fetch_assoc($resultData)){ //fetch data as associative array if it exists and create variable for log in
+    if ($row=mysqli_fetch_assoc($resultData)){
         return $row;
     }
     else{
         $result=false;
         return $result;
     }
-    //mysqli_stmt_close($stmt);
 }
 
+/**
+ * createUser uses the registration input entries to insert
+ * the new user into the database.
+ * This function uses prepared statements  so users cannot insert their own sql script through 
+ * the variables $username and $email as they will not be directly embedded.
+ * If the statement fails the error is passed through a header which will be checked and echoed 
+ * in registration.php
+ * 
+ * @param mixed $connection
+ * @param mixed $firstName
+ * @param mixed $lastName
+ * @param mixed $email
+ * @param mixed $usernameInput
+ * @param mixed $pwd
+ * @return never
+ */
 function createUser($connection, $firstName, $lastName, $email, $usernameInput, $pwd){
     $sql= "INSERT INTO users(users_forename, users_surname, users_email, users_username, users_password) VALUES (?,?,?,?,?);";
-    //prepared statements so users cannot insert their own sql script through the
-    // variables needed as they are not directly embedded
     $stmt = mysqli_stmt_init($connection);
     if (!mysqli_stmt_prepare($stmt,$sql)){
         header("location: ../registration.php?error=stmtfailed");
@@ -77,7 +129,6 @@ function createUser($connection, $firstName, $lastName, $email, $usernameInput, 
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
     signinUser($connection, $usernameInput, $pwd);
-    //header("location: ../index.php?error=none");
     exit();
 }
 
