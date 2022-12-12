@@ -5,6 +5,8 @@
 /**
  * emptyInputRegister checks if any of the
  * registration forms inputs have not been filled in.
+ * This is then used in register.inc.php to pass the relevent 
+ * error using a header.
  * @param mixed $username
  * @param mixed $email
  * @param mixed $firstName
@@ -132,6 +134,17 @@ function createUser($connection, $firstName, $lastName, $email, $usernameInput, 
     exit();
 }
 
+//Functions for sign in page
+
+/**
+ * emptyInputSignin checks if any of the
+ * sign in forms inputs have not been filled in.
+ * This is then used in signin.inc.php to pass the relevent 
+ * error using a header.
+ * @param mixed $user
+ * @param mixed $pwd
+ * @return bool
+ */
 function emptyInputSignin($user, $pwd){
     $result=false;
     if(empty($user)||empty($pwd)){
@@ -140,8 +153,19 @@ function emptyInputSignin($user, $pwd){
     return $result;
 }
 
-//Functions for sign in page
-
+/**
+ * signinUser uses the sign in input entries $user and $pwd to sign in
+ * the user then set the session variables. The $user variable can hold either the username 
+ * or email of the user as both of the relevent columns of the database are checked.
+ * If there is no matching user in the database a header is used to pass this error.
+ * If the user exists the password entered is verified against the password stored in 
+ * the database. For security the password stored is hashed, so the one entered will 
+ * be hashed before verification.
+ * @param mixed $connection
+ * @param mixed $user
+ * @param mixed $pwd
+ * @return never
+ */
 function signinUser($connection,$user,$pwd){
     $usernameExists=usernameExists($connection, $user, $user);
     if ($usernameExists === false){
@@ -169,6 +193,13 @@ function signinUser($connection,$user,$pwd){
 
 //Functions for home page
 
+/**
+ * getProducts uses the $connection variable to run through each 
+ * assoociative array created from each tuple of the database and 
+ * create the html card for each product.
+ * @param mixed $connection
+ * @return void
+ */
 function getProducts($connection){
     $sql= "SELECT * FROM product order by rand() LIMIT 0,12;";
 
