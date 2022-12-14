@@ -88,16 +88,6 @@
                         </div>
                     </div>
                 </div>
-                <?php
-                    if($errorMessage!==""){
-                    echo "
-                    <div class='row mb-3'>
-                        <strong>$errorMessage</strong>
-                    </div> 
-                    ";
-                    }
-                ?>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <input type="submit" name="createProductSubmit" id="createProductSubmit" class="btn btn-secondary" value="Create">

@@ -26,6 +26,9 @@
     elseif(invalidProductPrice($buyPrice,$sellPrice)!==false){
         header("location: ../admin.php?error=invalidprice"); 
     }
+    elseif(productExists($connection, $name, $category)!==false){
+        header("location: ../admin.php?error=productexists"); 
+    }
     else{
 
         uploadImage($image, $tmp_image);

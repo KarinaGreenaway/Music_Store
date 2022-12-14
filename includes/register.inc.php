@@ -21,7 +21,10 @@ if (isset($_POST["registerSubmit"])){ //checking that user got to page through a
         header("location: ../registration.php?error=invalidusername");
         exit();
     }
-
+    elseif (invalidName($firstName, $lastName)!== false){
+        header("location: ../registration.php?error=invalidname");
+        exit();
+    }
     elseif (invalidEmail($email)!== false){
         header("location: ../registration.php?error=invalidemail");
         exit();

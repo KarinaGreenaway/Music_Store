@@ -360,7 +360,9 @@ function emptyInputCreateProduct($name,$category,$description,$stock,$buyPrice,$
 
 /**
  * invalidProductStock checks that the stock number entered into
- * the 
+ * the add product or update product form is above 0. If the result 
+ * is true (stock 0 or below) this result is used to pass an error 
+ * through a header to the admin page to notify the user. 
  * @param mixed $stockInput
  * @return bool
  */
@@ -372,6 +374,15 @@ function invalidProductStock($stockInput){
     return $result;
 }
 
+/**
+ * invalidProductPrice checks that the buy price and sell price entered into
+ * the add product or update product form is above 0 and no more than 2 decimal places.
+ * If the result is true (price below 0 or above 2 decimal places) this result is used to 
+ * pass an error through a header to the admin page to notify the user. 
+ * @param mixed $buyPriceInput
+ * @param mixed $sellPriceInput
+ * @return bool
+ */
 function invalidProductPrice($buyPriceInput,$sellPriceInput){
     $result=false;
     if($buyPriceInput<0||$sellPriceInput<0||preg_match('/\.\d{3,}/', $buyPriceInput)||preg_match('/\.\d{3,}/', $sellPriceInput)){
@@ -380,21 +391,30 @@ function invalidProductPrice($buyPriceInput,$sellPriceInput){
     return $result;
 }
 
-function productExists($connection, $nameInput, $categoryInput){
-    $sql= "SELECT * FROM product WHERE product_name = ? AND product_category = ?;";
-    //prepared statements so users cannot insert their own sql script through the
-    // variables $name and $category as they are not directly embedded
+/**
+ * productExists checks if a product with an identical name and 
+ * category already exists within the product table and if so, 
+ * returns the row. This result would then be used to pass an 
+ * error through a header to the admin page which is used to 
+ * notify the user.
+ * @param mixed $connection
+ * @param mixed $nameInput
+ * @param mixed $categoryInput
+ * @return array|bool|null
+ */
+function productExists($connection, $name, $category){
+    $sql= "SELECT * FROM product WHERE product_name = ? AND category_name = ?;";
     $stmt = mysqli_stmt_init($connection);
     if (!mysqli_stmt_prepare($stmt, $sql)){
         header("location: ../admin.php?error=stmtfailed");
         exit();
     }
-    mysqli_stmt_bind_param($stmt, "ss",$nameInput, $categoryInput);
+    mysqli_stmt_bind_param($stmt, "ss",$name, $category);
     mysqli_stmt_execute($stmt);
 
     $resultData= mysqli_stmt_get_result($stmt);
 
-    if ($row=mysqli_fetch_assoc($resultData)){ //fetch data as associative array if it exists and create variable for log in
+    if ($row=mysqli_fetch_assoc($resultData)){ 
         return $row;
     }
     else{
@@ -403,15 +423,40 @@ function productExists($connection, $nameInput, $categoryInput){
     }
 }
 
+/**
+ * uploadImage moves the image file uploaded by the user
+ * through the add product or update product form to the 
+ * product_images folder within the admin folder. This same 
+ * file name is later stored in the database so it can call 
+ * this image file when needed.
+ * @param mixed $image
+ * @param mixed $tmp_image
+ * @return void
+ */
 function uploadImage($image, $tmp_image){
     move_uploaded_file($tmp_image, "../admin/product_images/$image");
 }
 
+/**
+ * createProduct uses the add product forms input entries to insert
+ * the new product and its details into the database.
+ * This function uses prepared statements  so users cannot insert their own sql script through 
+ * the variables inputted as they will not be directly embedded in the sql script.
+ * If the statement fails the error is passed through a header which will be checked and echoed 
+ * in admin.php
+ * @param mixed $connection
+ * @param mixed $name
+ * @param mixed $category
+ * @param mixed $description
+ * @param mixed $stock
+ * @param mixed $buyPrice
+ * @param mixed $sellPrice
+ * @param mixed $image
+ * @return never
+ */
 function createProduct($connection, $name, $category, $description, $stock, $buyPrice, $sellPrice, $image){
 
     $sql= "INSERT INTO product(product_name,category_name, product_description, product_stock,product_buy_price, product_sell_price,product_image) VALUES (?,?,?,?,?,?,?);";
-    //prepared statements so users cannot insert their own sql script through the
-    // variables needed as they are not directly embedded
     $stmt = mysqli_stmt_init($connection);
     if (!mysqli_stmt_prepare($stmt,$sql)){
         header("location: ../admin.php?error=stmtfailed");
@@ -425,6 +470,25 @@ function createProduct($connection, $name, $category, $description, $stock, $buy
     exit();
 }
 
+/**
+ * updateProduct uses the update product forms input entries to update the selected product 
+ * and its details in the database.
+ * This function uses prepared statements so users cannot insert their own sql script through 
+ * the variables inputted as they will not be directly embedded in the sql script.
+ * If the statement fails the error is passed through a header which will be checked and echoed 
+ * in admin.php
+ * @param mixed $connection
+ * @param mixed $id
+ * @param mixed $nameInput
+ * @param mixed $categoryInput
+ * @param mixed $descriptionInput
+ * @param mixed $stockInput
+ * @param mixed $buyPriceInput
+ * @param mixed $sellPriceInput
+ * @param mixed $imageInput
+ * @param mixed $tmpImageInput
+ * @return never
+ */
 function updateProduct($connection,$id, $nameInput, $categoryInput, $descriptionInput, $stockInput, $buyPriceInput, $sellPriceInput, $imageInput,$tmpImageInput){
     move_uploaded_file($tmpImageInput, "../admin/product_images/$imageInput");
 
@@ -441,6 +505,15 @@ function updateProduct($connection,$id, $nameInput, $categoryInput, $description
     exit;
 }
 
+/**
+ * deleteProduct uses the $id variable of the product table rows hidden input value
+ * to delete the specified product from the products table in the database.
+ * If the statement fails the error is passed through a header which will be checked and echoed 
+ * in admin.php
+ * @param mixed $connection
+ * @param mixed $id
+ * @return never
+ */
 function deleteProduct($connection, $id){
 
     $sql = "DELETE from product WHERE product_id='$id'";
@@ -459,7 +532,18 @@ function deleteProduct($connection, $id){
 
 // Functions for account page
 
-function emptyInputUpdateAccount($usernameInput, $firstName, $lastName, $email){ //maybe
+/**
+ * emptyInputUpdateAccount checks if any of the inputs of the update
+ * account form have not been filled in. The boolean result is 
+ * then used in account.inc.php to pass an error to profile.php 
+ * through a header if necessary.
+ * @param mixed $usernameInput
+ * @param mixed $firstName
+ * @param mixed $lastName
+ * @param mixed $email
+ * @return bool
+ */
+function emptyInputUpdateAccount($usernameInput, $firstName, $lastName, $email){ 
     $result=false;
     if(empty($usernameInput)||empty($firstName)||empty($lastName)||empty($email)){
         $result=true;
@@ -467,6 +551,15 @@ function emptyInputUpdateAccount($usernameInput, $firstName, $lastName, $email){
     return $result;
 }
 
+/**
+ * invalidName checks if the first name or last name inputs of the update
+ * account form only contain letters. The boolean result is 
+ * then used in account.inc.php to pass an error to profile.php 
+ * through a header if necessary.
+ * @param mixed $firstName
+ * @param mixed $lastName
+ * @return bool
+ */
 function invalidName($firstName, $lastName){
     $result=false;
     if(!preg_match("/^[a-zA-Z]+$/", $firstName)||!preg_match("/^[a-zA-Z]+$/", $lastName)){
@@ -475,6 +568,21 @@ function invalidName($firstName, $lastName){
     return $result;
 }
 
+/**
+ * updateAccount uses the update account forms input entries to update the current users 
+ * details in the users table in the database.
+ * This function uses prepared statements so users cannot insert their own sql script through 
+ * the variables inputted as they will not be directly embedded in the sql script.
+ * If the statement fails the error is passed through a header which will be checked and echoed 
+ * in profile.php
+ * @param mixed $connection
+ * @param mixed $usernameInput
+ * @param mixed $firstName
+ * @param mixed $lastName
+ * @param mixed $email
+ * @param mixed $id
+ * @return never
+ */
 function updateAccount($connection, $usernameInput, $firstName, $lastName, $email, $id){
     $sql2 = "UPDATE users SET users_username=?, users_forename=?,users_surname=?,users_email=? WHERE users_id='$id';";
     $stmt2 = mysqli_stmt_init($connection);
@@ -493,6 +601,15 @@ function updateAccount($connection, $usernameInput, $firstName, $lastName, $emai
     exit();
 }
 
+/**
+ * deleteAccount uses the $id variable taken from the session variable users_id
+ * to delete the user from the users table in the database.
+ * If the statement fails the error is passed through a header which will be checked and echoed 
+ * in admin.php
+ * @param mixed $connection
+ * @param mixed $id
+ * @return never
+ */
 function deleteAccount($connection, $id){
     $sql = "DELETE from users WHERE users_id='$id'";
     $stmt = mysqli_stmt_init($connection);
