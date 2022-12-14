@@ -267,8 +267,6 @@ function getResults($connection, $search){
     $where = substr($where, 0, -4);  
     $sql = "SELECT * FROM product WHERE " . $where; 
 
-    //$sql = "SELECT * FROM product WHERE product_name LIKE '%$search%' OR category_name LIKE '%$search%' OR product_description LIKE '%$search%'";
-
     $resultData= mysqli_query($connection,$sql);
 
     if ($resultData->num_rows>0){

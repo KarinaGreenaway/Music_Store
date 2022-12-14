@@ -1,6 +1,11 @@
 <?php
 include_once 'header.php';
 ?>
+<?php
+if (($_SESSION["users_is_admin"]===0)||!isset($_SESSION["users_is_admin"])){
+    header("location: index.php");
+}
+?>
 
 <!-- Header-->
 <header class="bg-dark text-white py-4">
