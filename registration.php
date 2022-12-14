@@ -54,7 +54,7 @@ include_once 'header.php';
                                 } elseif ($_GET["error"] == "passwordsdontmatch") {
                                     echo "
                                     <div class='alert alert-light alert-dismissible fade show' role='alert'>
-                                        <strong>Please enter matching passwords</strong>
+                                        <strong>Please enter matching passwords.</strong>
                                         <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
                                             <span aria-hidden='true'>&times;</span>
                                         </button>
