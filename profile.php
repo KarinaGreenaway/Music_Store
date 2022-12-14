@@ -95,13 +95,13 @@ include_once 'header.php';
                         require_once 'includes/connection.php';
 
 
-                         $userId=$_SESSION['users_id'];
-                         $sql="SELECT * FROM users WHERE users_id='$userId'";
+                        $userId=$_SESSION['users_id'];
+                        $sql="SELECT * FROM users WHERE users_id='$userId'";
 
-                         $userData=mysqli_query($connection, $sql);
+                        $userData=mysqli_query($connection, $sql);
 
-                         if (!$userData){
-                             echo "
+                        if (!$userData){
+                            echo "
                                 <div class='alert alert-light alert-dismissible fade show' role='alert'>
                                     <strong>Could not fetch your account data. Try again later.</strong>
                                     <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
@@ -110,8 +110,8 @@ include_once 'header.php';
                                 </div>  
                              ";
                          }
-                         else {
-                             while ($userRow = mysqli_fetch_assoc($userData)) {
+                        else {
+                            while ($userRow = mysqli_fetch_assoc($userData)) {
                                  $usernameInput = $userRow["users_username"];
                                  $firstName = $userRow["users_forename"];
                                  $lastName = $userRow["users_surname"];
@@ -120,42 +120,39 @@ include_once 'header.php';
 
                                  <h3 class='fw-normal mb-4 pb-3 text-light'>My Account Details</h3>
 
-                        <div class='form-outline mb-4'>
-                            <input type='text' name='name' id='name' class='form-control form-control-lg' value='$usernameInput'' />
-                            <label class='form-label text-secondary'>Username</label>
-                        </div>
+                                <div class='form-outline mb-4'>
+                                    <input type='text' name='name' id='name' class='form-control form-control-lg' value='$usernameInput'' />
+                                    <label class='form-label text-secondary'>Username</label>
+                                </div>
 
-                        <div class='form-outline mb-4'>
-                            <input type='text' name='firstName' id='firstName' class='form-control form-control-lg' value='$firstName' />
-                            <label class='form-label text-secondary'>First Name</label>
-                        </div>
+                                <div class='form-outline mb-4'>
+                                    <input type='text' name='firstName' id='firstName' class='form-control form-control-lg' value='$firstName' />
+                                    <label class='form-label text-secondary'>First Name</label>
+                                </div>
 
-                        <div class='form-outline mb-4'>
-                            <input type='text' name='lastName' id='lastName' class='form-control form-control-lg' value='$lastName' />
-                            <label class='form-label text-secondary'>Last Name</label>
-                        </div>
+                                <div class='form-outline mb-4'>
+                                    <input type='text' name='lastName' id='lastName' class='form-control form-control-lg' value='$lastName' />
+                                    <label class='form-label text-secondary'>Last Name</label>
+                                </div>
 
-                        <div class='form-outline mb-4'>
-                            <input type='email' name='email' id='email' class='form-control form-control-lg' value='$email' />
-                            <label class='form-label text-secondary '>Email address</label>
-                        </div>
+                                <div class='form-outline mb-4'>
+                                    <input type='email' name='email' id='email' class='form-control form-control-lg' value='$email' />
+                                    <label class='form-label text-secondary '>Email address</label>
+                                </div>
 
-                        <div class='pt-1 mb-4'>
-                            <input type='submit' name='editAccountSubmit' class='btn btn-secondary btn-lg btn-block' value='Save Changes'>
-                        </div>
+                                <div class='pt-1 mb-4'>
+                                    <input type='submit' name='editAccountSubmit' class='btn btn-secondary btn-lg btn-block' value='Save Changes'>
+                                </div>
 
-                        <div class='pt-1 mb-4'>
-                            <input  type='submit' name='deleteAccountSubmit' class='btn btn-secondary btn-lg btn-block' value='Delete Account'/>
-                        </div>
+                                <div class='pt-1 mb-4'>
+                                    <input  type='submit' name='deleteAccountSubmit' class='btn btn-secondary btn-lg btn-block' value='Delete Account'/>
+                                </div>
                                  ";
 
-                             }
-                         }
+                            }
+                        }
                         ?>
-
                     </form>
-
-                    
                     <!-- Profile Form End-->
                 </div>
             </div>
@@ -170,10 +167,6 @@ include_once 'header.php';
         </div>
     </div>
 </section>
-
-
-
-
 
 <?php
 include_once 'footer.php';

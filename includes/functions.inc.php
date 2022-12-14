@@ -107,9 +107,9 @@ function usernameExists($connection, $username, $email){
  * @return bool
  */
 function vulnerablePassword($pwd){
-    $result=false;
+    $result=true;
     if(!preg_match("/^(.{0,7}|[^a-z]*|[^\d]*)$/i", $pwd)){
-        $result=true;
+        $result=false;
     }
     return $result;    
 }
@@ -258,7 +258,16 @@ function getProducts($connection){
  */
 function getResults($connection, $search){
 
-    $sql = "SELECT * FROM product WHERE product_name LIKE '%$search%' OR category_name LIKE '%$search%' OR product_description LIKE '%$search%'";
+    $query = explode(" ", $search);
+    foreach($query as $text)  
+    {
+        $condition = mysqli_real_escape_string($connection, $text);
+        $where = "product_name LIKE '%$condition%' OR category_name LIKE '%$condition%' OR product_description LIKE '%$condition%' OR ";  
+    }  
+    $where = substr($where, 0, -4);  
+    $sql = "SELECT * FROM product WHERE " . $where; 
+
+    //$sql = "SELECT * FROM product WHERE product_name LIKE '%$search%' OR category_name LIKE '%$search%' OR product_description LIKE '%$search%'";
 
     $resultData= mysqli_query($connection,$sql);
 
@@ -290,7 +299,7 @@ function getResults($connection, $search){
 }
 
 else{
-    echo "0 records";
+    echo "<p class='text-light align-text-center'>Oops! 0 records found. Try searching for something else.</p>";
 }
 }
 

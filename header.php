@@ -1,13 +1,11 @@
 <?php
     session_start();
-    $errorMessage = "";
-    $successMessage = "";
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Ugly Lil Website</title>
+    <title>Symphony</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -15,14 +15,3 @@ if (isset($_POST["signinSubmit"])) {
    
 
 }
-
-
-
-//    signinUser($connection,$user,$pwd);
-//}
-
-
-//else{
-   // header("location:../signin.php");
-   // exit;
-//}

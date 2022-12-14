@@ -35,6 +35,11 @@ if (isset($_POST["registerSubmit"])){
         exit();
     }
 
+    elseif(vulnerablePassword($pwd)!== false){
+        header("location: ../registration.php?error=vulnerablepassword");
+        exit();
+    }
+
     elseif (usernameExists($connection, $usernameInput, $email)!== false){
         header("location: ../registration.php?error=usernametaken");
         exit();
@@ -44,10 +49,6 @@ if (isset($_POST["registerSubmit"])){
         createUser($connection, $firstName, $lastName, $email, $usernameInput, $pwd);
         mysqli_close($connection);
     }
-
-
-// maybe one for a long enough password
-
 }
 
 

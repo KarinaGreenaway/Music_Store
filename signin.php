@@ -49,17 +49,15 @@ include_once 'header.php';
               <label class="form-label text-secondary">Password</label>
             </div>
 
-                <div class="pt-1 mb-4">
-                    <input type="submit" name="signinSubmit" class="btn btn-secondary btn-lg btn-block" value="Sign In">
-                </div>
+            <div class="pt-1 mb-4">
+              <input type="submit" name="signinSubmit" class="btn btn-secondary btn-lg btn-block" value="Sign In">
+            </div>
 
             <p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p>
             <p class="text-muted" >Don't have an account? <a href="registration.php" class="text-light">Register now</a></p>
-
+            
           </form>
-
         </div>
-
       </div>
       <div class="col-sm-6 px-0 d-none d-sm-block">
         <img src="Images/instrument-1.jpg"

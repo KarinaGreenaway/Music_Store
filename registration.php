@@ -6,16 +6,13 @@ include_once 'header.php';
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6 mt-5 px-4">
-
                 <div class="d-flex list-group list-group-horizontal justify-content-center" >
-
                     <!-- Registration Form-->
                     <form action="includes/register.inc.php" method="post" id="registerForm" style="width: 23rem;" >
 
                         <!--In case of errors-->
                         <div class="text-light">
                             <?php
-
                             if (isset($_GET["error"])) {
 
                                 if ($_GET["error"] == "emptyinput") {
@@ -63,7 +60,16 @@ include_once 'header.php';
                                         </button>
                                     </div>    
                                 ";
-                                } elseif ($_GET["error"] == "usernametaken") {
+                                } elseif ($_GET["error"] == "vulnerablepassword") {
+                                    echo "
+                                    <div class='alert alert-light alert-dismissible fade show' role='alert'>
+                                        <strong>Please enter a password that is at least 8 characters and contains at least 1 number and 1 letter.</strong>
+                                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                                            <span aria-hidden='true'>&times;</span>
+                                        </button>
+                                    </div>    
+                                ";
+                                }elseif ($_GET["error"] == "usernametaken") {
                                     echo "
                                     <div class='alert alert-light alert-dismissible fade show' role='alert'>
                                         <strong>This username/email is taken. Please enter a new one.</strong>
@@ -94,7 +100,7 @@ include_once 'header.php';
                             }   
                             ?>
                         </div>
-                        <!--In case of errors-->                    
+                        <!--In case of errors End-->                    
 
                         <h3 class="fw-normal mb-3 pb-3 text-light">Register</h3>
 
@@ -133,7 +139,6 @@ include_once 'header.php';
                         </div>
                     </form>
                     <!-- Registration Form End-->
-
                 </div>
             </div>
 
@@ -143,11 +148,9 @@ include_once 'header.php';
                      alt="Registration image" class="w-100 h-100" style="object-fit: cover; object-position: left;">
             </div>
             <!-- Side Image end-->
-
         </div>
     </div>
 </section>
-
 
 <?php
 include_once 'footer.php';
