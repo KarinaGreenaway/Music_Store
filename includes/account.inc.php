@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 $id = $_SESSION['users_id'];
@@ -28,24 +29,20 @@ elseif(invalidEmail($email)!== false){
 }
 
 elseif (isset($_POST['editAccountSubmit'])) {
-
     updateAccount($connection, $usernameInput, $firstName, $lastName, $email, $id);
     mysqli_close($connection);
+}
 
-    }
-
-
+/** The elseif statement below passes a requirement through a header
+ * rather than an error that is checked in profile.php to confirm the
+ * user wants to delete their account, preventing deleting it by mistake.
+ */
 elseif (isset($_POST['deleteAccountSubmit'])) {
-
     header("location: ../profile.php?require=confirmpassword");  
-
 }
 
 elseif (isset($_POST['deleteAccountSubmitConfirmed'])) {
-
     $id = $_SESSION['users_id'];
-
     deleteAccount($connection, $id);
-    mysqli_close($connection);
-    
+    mysqli_close($connection); 
 }

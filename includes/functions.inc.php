@@ -99,6 +99,22 @@ function usernameExists($connection, $username, $email){
 }
 
 /**
+ * vulnerablePassword checks if the password inputted through the registration 
+ * form is under 8 characters and doesn't contain at least 1 number and 1 letter.
+ * The boolean result is then used in register.inc.php to pass an error to registration.php 
+ * through a header if necessary.
+ * @param mixed $pwd
+ * @return bool
+ */
+function vulnerablePassword($pwd){
+    $result=false;
+    if(!preg_match("/^(.{0,7}|[^a-z]*|[^\d]*)$/i", $pwd)){
+        $result=true;
+    }
+    return $result;    
+}
+
+/**
  * createUser uses the registration input entries to insert
  * the new user into the database.
  * This function uses prepared statements  so users cannot insert their own sql script through 

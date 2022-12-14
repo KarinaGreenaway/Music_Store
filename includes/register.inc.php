@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_POST["registerSubmit"])){ //checking that user got to page through actually signing up
+if (isset($_POST["registerSubmit"])){
 
     $usernameInput = $_POST["username"];
     $firstName = $_POST["firstName"];
