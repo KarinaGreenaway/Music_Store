@@ -1,7 +1,11 @@
 <?php
 include_once 'header.php';
 ?>
-
+<?php
+if (($_SESSION["users_is_admin"]===0)||!isset($_SESSION["users_is_admin"])){
+    header("location: index.php");
+}
+?>
 <div class="container-fluid">
     <div class="d-flex list-group list-group-horizontal justify-content-center" >
         <!-- Update Product-->
@@ -48,9 +52,6 @@ include_once 'header.php';
 
                     <div class='modal-header'>
                         <h5 class='modal-title' id='exampleModalScrollableTitle'>Edit Product</h5>
-                        <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-                            <span class='text-light' aria-hidden='true'>&times;</span>
-                        </button>
                     </div>
             
                     <div class='modal-body'>
