@@ -230,7 +230,7 @@ function getProducts($connection){
         echo "
 
         <div class='col-sm-6 col-md-4 col-lg-4 col-xl-3 pt-4'>
-           <div class='card bg-light border-secondary border-2' style='height: 70vh' >
+           <div class='card bg-light border-secondary border-2' style='height: 65vh' >
                <img class='card-img-top' src='admin/product_images/$productImage' alt='$productName Image' style='width: 100%; height: 30vh; object-fit: contain;'>
                <div class='card-body h-100 d-flex flex-column'>
                    <h5 class='card-title'>$productName</h5>

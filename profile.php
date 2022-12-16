@@ -158,9 +158,9 @@ include_once 'header.php';
             </div>
 
             <!-- Side Image-->
-            <div class="col-sm-6 px-0 d-none d-sm-block">
+            <div class="col-sm-6 px-0 d-none d-sm-block min-vh-100">
                 <img src="Images/instrument-3.jpg"
-                     alt="Registration image" class="w-100 h-100" style="object-fit: cover; object-position: left;">
+                     alt="Registration image" class="w-100 h-100 min-vh-100" style="object-fit: cover; object-position: left;">
             </div>
             <!-- Side Image end-->
 
